@@ -133,6 +133,12 @@
                         <span>Mahasiswa</span>
                     </a>
                 </li>
+                <li id="menu3">
+                    <a href="<?= base_url();?>dosen">
+                        <i class="material-icons">layers</i>
+                        <span>Dosen</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- #Menu -->

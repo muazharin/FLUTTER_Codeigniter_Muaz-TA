@@ -31,6 +31,27 @@ class Mahasiswa extends CI_Controller {
 		
 	}
 
+	public function edit()
+	{
+		$data['mahasiswa'] = $this->M_mahasiswa->getAllMhs();
+		$this->form_validation->set_rules('nim1','NIM','required|trim|xss_clean|max_length[9]');
+		$this->form_validation->set_rules('nama1','Nama','required|trim|xss_clean');
+		$this->form_validation->set_rules('tempat_lahir1','Tempat Lahir','required|trim|xss_clean');
+		$this->form_validation->set_rules('tanggal_lahir1','Tanggal Lahir','required|trim|xss_clean');
+		// $this->form_validation->set_rules('foto','Foto','required|trim|xss_clean');
+		if($this->form_validation->run()==FALSE){
+			$data['sidebar'] = '#menu2';
+			$this->load->view('template/header');
+			$this->load->view('pages/mahasiswa',$data);
+			$this->load->view('template/footer',$data);
+		}else{
+			$this->M_mahasiswa->edit();
+			$this->session->set_flashdata('mahasiswa', 'Diperbarui');
+			redirect('mahasiswa');
+		}
+		
+	}
+
 	public function hapus($id=null, $foto=null, $qrcode=null){
 		$this->M_mahasiswa->hapus($id, $foto, $qrcode);
 		$this->session->set_flashdata('mahasiswa', 'Dihapus');
