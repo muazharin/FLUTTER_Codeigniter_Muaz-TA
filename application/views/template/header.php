@@ -139,6 +139,12 @@
                         <span>Dosen</span>
                     </a>
                 </li>
+                <li id="menu4">
+                    <a href="<?= base_url();?>kuliah">
+                        <i class="material-icons">view_list</i>
+                        <span>Mata Kuliah</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- #Menu -->
