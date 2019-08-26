@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data['sidebar'] = '#menu1';
+		$data['sidebar1'] = '';
 		$this->load->view('template/header');
 		$this->load->view('home');
 		$this->load->view('template/footer',$data);

@@ -30,16 +30,17 @@
                         <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button>
                         <hr>
                         <div class="row">
+                                        
                         <?php foreach($dosen as $d):?>
-                            <div class="col-sm-6 col-md-3">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
                                     <img src="<?= base_url();?>assets/images/dosen/<?= $d['foto'];?>" style="width: 200px; height: 250px;">
                                     <div class="caption">
-                                        <h5><?= $d['nama'];?></h5>
+                                        <h5><?= character_limiter($d['nama'], 30);?></h5>
                                         <p>- <?= $d['nip'];?></p>
                                         <p>- <?= character_limiter($d['email'], 10);?></p>
                                         <p>- <?= $d['minat_ajar'];?></p>
-                                        <p>- <?= $d['keterangan'];?></p>
+                                        <p>- <?= character_limiter($d['keterangan'], 10);?> </p>
                                         <p>
                                             <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myFormD<?= $d['id_dosen'];?>"><i class="material-icons">mode_edit</i></button>
                                             <a href="<?= base_url();?>dosen/hapus/<?= $d['id_dosen'];?>/<?= $d['foto']?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>

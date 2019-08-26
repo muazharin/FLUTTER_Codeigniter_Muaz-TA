@@ -22,6 +22,7 @@ class Dosen extends CI_Controller {
 		$this->form_validation->set_rules('keterangan','Keterangan','trim|xss_clean');
 		if($this->form_validation->run()==FALSE){
 			$data['sidebar'] = '#menu3';
+			$data['sidebar1'] = '';
             $this->load->view('template/header');
             $this->load->view('pages/dosen',$data);
             $this->load->view('template/footer',$data);
@@ -45,6 +46,7 @@ class Dosen extends CI_Controller {
 		$this->form_validation->set_rules('keterangan1','Keterangan','trim|xss_clean');
 		if($this->form_validation->run()==FALSE){
 			$data['sidebar'] = '#menu3';
+			$data['sidebar1'] = '';
             $this->load->view('template/header');
             $this->load->view('pages/dosen',$data);
             $this->load->view('template/footer',$data);

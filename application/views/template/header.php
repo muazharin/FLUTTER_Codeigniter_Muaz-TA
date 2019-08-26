@@ -127,6 +127,20 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li id="menu4">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">view_list</i>
+                        <span>Mata Kuliah</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li id="menu4-1">
+                            <a href="<?= base_url();?>pengantar"> MK Pengantar</a>
+                        </li>
+                        <li id="menu4-2">
+                            <a href="<?= base_url();?>peminatan">MK Peminatan</a>
+                        </li>
+                    </ul>
+                </li>
                 <li id="menu2">
                     <a href="<?= base_url();?>mahasiswa">
                         <i class="material-icons">people</i>
@@ -139,12 +153,7 @@
                         <span>Dosen</span>
                     </a>
                 </li>
-                <li id="menu4">
-                    <a href="<?= base_url();?>kuliah">
-                        <i class="material-icons">view_list</i>
-                        <span>Mata Kuliah</span>
-                    </a>
-                </li>
+                
             </ul>
         </div>
         <!-- #Menu -->

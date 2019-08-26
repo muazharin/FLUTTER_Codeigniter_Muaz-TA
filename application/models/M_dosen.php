@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_Dosen extends CI_Model {
 
     public function getAllDosen(){
-        return $this->db->get('tb_dosen')->result_array();
+        $query = $this->db->query("SELECT * FROM tb_dosen ORDER BY nama ASC");
+        return $query->result_array();
     }
 
     public function tambah(){

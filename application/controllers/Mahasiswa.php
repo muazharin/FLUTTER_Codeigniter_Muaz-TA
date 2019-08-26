@@ -20,6 +20,7 @@ class Mahasiswa extends CI_Controller {
 		// $this->form_validation->set_rules('foto','Foto','required|trim|xss_clean');
 		if($this->form_validation->run()==FALSE){
 			$data['sidebar'] = '#menu2';
+			$data['sidebar1'] = '';
 			$this->load->view('template/header');
 			$this->load->view('pages/mahasiswa',$data);
 			$this->load->view('template/footer',$data);
@@ -41,6 +42,7 @@ class Mahasiswa extends CI_Controller {
 		// $this->form_validation->set_rules('foto','Foto','required|trim|xss_clean');
 		if($this->form_validation->run()==FALSE){
 			$data['sidebar'] = '#menu2';
+			$data['sidebar1'] = '';
 			$this->load->view('template/header');
 			$this->load->view('pages/mahasiswa',$data);
 			$this->load->view('template/footer',$data);
