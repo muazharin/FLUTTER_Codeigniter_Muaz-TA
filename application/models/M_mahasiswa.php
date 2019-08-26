@@ -7,7 +7,7 @@ class M_Mahasiswa extends CI_Model {
         return $this->db->get('tb_mhs')->result_array();
     }
     
-    public function save($nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name){
+    public function save($nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name, $str){
         $this->load->library('upload');
         $config['upload_path'] = './assets/images/mahasiswa';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
@@ -27,6 +27,7 @@ class M_Mahasiswa extends CI_Model {
                     'tmpt_lahir' => $tempat_lahir,
                     'tgl_lahir' => $tanggal_lahir,
                     'foto' => $foto['file_name'],
+                    'kode_unik' => $str,
                     'qr_code' => $image_name
                 ];
                 $this->db->insert('tb_mhs',$data);
@@ -81,10 +82,8 @@ class M_Mahasiswa extends CI_Model {
         $tanggal_lahir = $this->input->post('tanggal_lahir', true);
         $key = substr($nim,'4','5');
         $str = 'E1E1'.$tanggal_lahir.$key.$tempat_lahir;
-        $a = substr($nim,'4','2');
-        $b = substr($nim,'6','3');
         $dataqr = $this->rc4($key, $str);
-        $qr = base64_encode($a.$dataqr.$b);
+        $qr = base64_encode($key.$dataqr);
 
         $this->load->library('ciqrcode'); //pemanggilan library QR CODE
  
@@ -106,10 +105,10 @@ class M_Mahasiswa extends CI_Model {
         $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
 
-        $this->save($nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name);
+        $this->save($nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name, $str);
     }
 
-    public function update($id_mhs, $nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name){
+    public function update($id_mhs, $nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name, $str){
         $this->load->library('upload');
         $config['upload_path'] = './assets/images/mahasiswa';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
@@ -135,6 +134,7 @@ class M_Mahasiswa extends CI_Model {
                     'tmpt_lahir' => $tempat_lahir,
                     'tgl_lahir' => $tanggal_lahir,
                     'foto' => $foto['file_name'],
+                    'kode_unik' => $str,
                     'qr_code' => $image_name
                 ];
                 $this->db->where('id_mhs', $id_mhs);
@@ -154,7 +154,6 @@ class M_Mahasiswa extends CI_Model {
 	    }else {
 	      echo "tidak masuk";
 	    }
-
     }
 
     public function edit(){
@@ -166,10 +165,8 @@ class M_Mahasiswa extends CI_Model {
         $tanggal_lahir = $this->input->post('tanggal_lahir1', true);
         $key = substr($nim,'4','5');
         $str = 'E1E1'.$tanggal_lahir.$key.$tempat_lahir;
-        $a = substr($nim,'4','2');
-        $b = substr($nim,'6','3');
         $dataqr = $this->rc4($key, $str);
-        $qr = base64_encode($a.$dataqr.$b);
+        $qr = base64_encode($key.$dataqr);
 
         $this->load->library('ciqrcode'); //pemanggilan library QR CODE
  
@@ -191,7 +188,7 @@ class M_Mahasiswa extends CI_Model {
         $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
 
-        $this->update($id_mhs, $nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name);
+        $this->update($id_mhs, $nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name, $str);
     }
 
     public function hapus($id, $foto, $qrcode){

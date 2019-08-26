@@ -8,6 +8,7 @@ class Dosen extends CI_Controller {
             redirect('login');
 		}
 		$this->load->model('M_dosen');
+		$this->load->helper('text');
     }
 
     public function index()

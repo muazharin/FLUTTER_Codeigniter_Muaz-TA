@@ -14,31 +14,31 @@ class M_Dosen extends CI_Model {
         $minat_ajar = $this->input->post('minat_ajar',true);
         $keterangan = $this->input->post('keterangan',true);
         
-        // $this->load->library('upload');
+        $this->load->library('upload');
         $config['upload_path'] = './assets/images/dosen';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
         $config['max_size'] = '2048';  //2MB max
-        // $config['max_width'] = '4480'; // pixel
-        // $config['max_height'] = '4480'; // pixel
-        $config['file_name'] = base64_encode($this->input->post('nama'));
+        $config['file_name'] = $_FILES['foto']['name'];
         $config['overwrite'] = true;
 
-        // $this->upload->initialize($config);
-        $this->load->library('upload', $config);
-	    
-        if ( $this->upload->do_upload('foto') ) {
-            $foto = $this->upload->data();
-            $data = [
-                'nip' => $nip,
-                'nama' => $nama,
-                'email' => $email,
-                'minat_ajar' => $minat_ajar,
-                'foto' => $foto['file_name'],
-                'keterangan' => $keterangan
-            ];
-            $this->db->insert('tb_dosen',$data);
-        }else {
-            die("gagal upload");
+        $this->upload->initialize($config);
+        if (!empty($_FILES['foto']['name']) ) {
+            if( $this->upload->do_upload('foto') ){
+                $foto = $this->upload->data();
+                $data = [
+                    'nip' => $nip,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'minat_ajar' => $minat_ajar,
+                    'foto' => $foto['file_name'],
+                    'keterangan' => $keterangan
+                ];
+                $this->db->insert('tb_dosen',$data);
+            }else {
+                die("gagal upload");
+            }
+        }else{
+            echo "tidak masuk";
         }
     
     }
@@ -51,33 +51,35 @@ class M_Dosen extends CI_Model {
         $minat_ajar = $this->input->post('minat_ajar1',true);
         $keterangan = $this->input->post('keterangan1',true);
         
-        // $this->load->library('upload');
+        $this->load->library('upload');
         $config['upload_path'] = './assets/images/dosen';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
         $config['max_size'] = '2048';  //2MB max
-        // $config['max_width'] = '4480'; // pixel
-        // $config['max_height'] = '4480'; // pixel
-        $config['file_name'] = base64_encode($this->input->post('nama1'));
+        $config['file_name'] = $_FILES['foto1']['name'];
         $config['overwrite'] = true;
 
-        // $this->upload->initialize($config);
-        $this->load->library('upload', $config);
-	    
-        if ( $this->upload->do_upload('foto1') ) {
-            $foto = $this->upload->data();
-            $data = [
-                'nip' => $nip,
-                'nama' => $nama,
-                'email' => $email,
-                'minat_ajar' => $minat_ajar,
-                'foto' => $foto['file_name'],
-                'keterangan' => $keterangan
-            ];
-            $path_dosen = './assets/images/dosen/';
-            @unlink($path_dosen.$this->input->post('foto2'));
-            $this->db->where('id_dosen',$id_dosen);
-            $this->db->update('tb_dosen',$data);
-        }else {
+        $this->upload->initialize($config);
+        
+	    if(!empty($_FILES['foto1']['name'])){
+            if ( $this->upload->do_upload('foto1') ) {
+                $foto = $this->upload->data();
+                $data = [
+                    'nip' => $nip,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'minat_ajar' => $minat_ajar,
+                    'foto' => $foto['file_name'],
+                    'keterangan' => $keterangan
+                ];
+                $path_dosen = './assets/images/dosen/';
+                @unlink($path_dosen.$this->input->post('foto2'));
+                $this->db->where('id_dosen',$id_dosen);
+                $this->db->update('tb_dosen',$data);
+            }else {
+                die("gagal upload");
+                
+            }
+        }else{
             $data = [
                 'nip' => $nip,
                 'nama' => $nama,

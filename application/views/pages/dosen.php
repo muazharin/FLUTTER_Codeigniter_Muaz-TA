@@ -33,10 +33,11 @@
                         <?php foreach($dosen as $d):?>
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="<?= base_url();?>assets/images/dosen/<?= $d['foto'];?>" width="300" height="350">
+                                    <img src="<?= base_url();?>assets/images/dosen/<?= $d['foto'];?>" style="width: 200px; height: 250px;">
                                     <div class="caption">
-                                        <h3><?= $d['nama'];?></h3>
-                                        <p>- <?= $d['email'];?></p>
+                                        <h5><?= $d['nama'];?></h5>
+                                        <p>- <?= $d['nip'];?></p>
+                                        <p>- <?= character_limiter($d['email'], 10);?></p>
                                         <p>- <?= $d['minat_ajar'];?></p>
                                         <p>- <?= $d['keterangan'];?></p>
                                         <p>
