@@ -55,6 +55,7 @@
     <script src="<?= base_url();?>assets/js/pages/index.js"></script>
     <script src="<?= base_url();?>assets/js/pages/forms/basic-form-elements.js"></script>
     <script src="<?= base_url();?>assets/js/pages/forms/form-validation.js"></script>
+    <script src="<?= base_url();?>assets/js/pages/forms/advanced-form-elements.js"></script>
 
     <!-- Demo Js -->
     <script src="<?= base_url();?>assets/js/demo.js"></script>

@@ -31,7 +31,7 @@
                         <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button>
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="overflow: true;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -39,6 +39,10 @@
                                         <th>Nama Mata Kuliah</th>
                                         <th>Dosen1</th>
                                         <th>Dosen2</th>
+                                        <th>Hari</th>
+                                        <th>Mulai</th>
+                                        <th>Selesai</th>
+                                        <th>Ruang</th>
                                         <th>Kelas</th>
                                         <th>Semester</th>
                                         <th>Aksi</th>
@@ -51,6 +55,10 @@
                                         <th>Nama Mata Kuliah</th>
                                         <th>Dosen1</th>
                                         <th>Dosen2</th>
+                                        <th>Hari</th>
+                                        <th>Mulai</th>
+                                        <th>Selesai</th>
+                                        <th>Ruang</th>
                                         <th>Kelas</th>
                                         <th>Semester</th>
                                         <th>Aksi</th>
@@ -65,11 +73,15 @@
                                         <td><?= $pen['nama_mata_kuliah'];?></td>
                                         <td><?= $pen['dosen_satu'];?></td>
                                         <td><?= $pen['dosen_dua'];?></td>
+                                        <td><?= $pen['hari'];?></td>
+                                        <td><?= $pen['mulai'];?></td>
+                                        <td><?= $pen['selesai'];?></td>
+                                        <td><?= $pen['ruang'];?></td>
                                         <td><?= $pen['kelas'];?></td>
                                         <td><?= $pen['semester'];?></td>
                                         <td>
                                             <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myForm<?= $pen['id_mata_kuliah_pengantar'];?>"><i class="material-icons">mode_edit</i></button>
-                                            <a href="<?= base_url();?>mahasiswa/hapus/<?= $pen['id_mata_kuliah_pengantar'];?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>
+                                            <a href="<?= base_url();?>kuliah/hapus_pengantar/<?= $pen['id_mata_kuliah_pengantar'];?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>
                                         </td>
                                     </tr>
                                     <?php endforeach;?>
@@ -130,9 +142,45 @@
                             <div class="form-group form-float">
                                 <label class="form-label">Dosen 2</label>
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="dosen_dua" placeholder="Masukkan Dosen 2" required>
+                                    <input type="text" class="form-control" name="dosen_dua" placeholder="Masukkan Dosen 2">
                                 </div>
                                 <div class="help-info"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p>Hari</p>
+                                    <select class="form-control show-tick" name="hari">
+                                        <option></option>
+                                        <?php foreach($hari as $ha):?>
+                                            <option value="<?= $ha;?>"><?= $ha;?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <label class="form-label">Mulai</label>
+                                <div class="form-line">
+                                    <input type="time" class="form-control" name="mulai" placeholder="Masukkan Jadwal Mulai">
+                                </div>
+                                <div class="help-info"></div>
+                            </div>
+                            <div class="form-group form-float">
+                                <label class="form-label">Selesai</label>
+                                <div class="form-line">
+                                    <input type="time" class="form-control" name="selesai" placeholder="Masukkan Jadwal Selesai">
+                                </div>
+                                <div class="help-info"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p>Ruang</p>
+                                    <select class="form-control show-tick" name="ruang">
+                                        <option></option>
+                                        <?php foreach($ruang as $ru):?>
+                                            <option value="<?= $ru;?>"><?= $ru;?></option>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-line">
@@ -170,7 +218,7 @@
 
 <?php foreach($pengantar as $pen): ?>
 <!-- Modal -->
-<div id="myForm<?= $pen['id_mhs'];?>" class="modal fade" role="dialog">
+<div id="myForm<?= $pen['id_mata_kuliah_pengantar'];?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -190,34 +238,78 @@
                     </div>
                     <div class="body">
                         <!-- Advanced Validation -->
-                        <form id="form_advanced_validation" method="post" action="mahasiswa/edit" enctype="multipart/form-data">
+                        <form id="form_advanced_validation" method="post" action="kuliah/edit_pengantar" enctype="multipart/form-data">
                         <div class="form-group form-float">
                                 <label class="form-label">Kode Mata Kuliah</label>
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="kode_mk1" placeholder="Masukkan NIM Mahasiswa" required>
+                                    <input type="text" class="form-control" name="kode_mk1" value="<?= $pen['kode_mata_kuliah'];?>" required>
                                 </div>
                                 <div class="help-info"></div>
                             </div>
                             <div class="form-group form-float">
                                 <label class="form-label">Nama Mata Kuliah</label>
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="nama_mk1" placeholder="Masukkan NIM Mahasiswa" required>
+                                    <input type="text" class="form-control" name="nama_mk1" value="<?= $pen['nama_mata_kuliah'];?>" required>
                                 </div>
                                 <div class="help-info"></div>
                             </div>
                             <div class="form-group form-float">
                                 <label class="form-label">Dosen 1</label>
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="dosen_satu1" placeholder="Masukkan NIM Mahasiswa" required>
+                                    <input type="text" class="form-control" name="dosen_satu1" value="<?= $pen['dosen_satu'];?>" required>
                                 </div>
                                 <div class="help-info"></div>
                             </div>
                             <div class="form-group form-float">
                                 <label class="form-label">Dosen 2</label>
                                 <div class="form-line">
-                                    <input type="text" class="form-control" name="dosen_dua1" placeholder="Masukkan NIM Mahasiswa" required>
+                                    <input type="text" class="form-control" name="dosen_dua1" value="<?= $pen['dosen_dua'];?>" placeholder="Masukkan Nama Dosen 2">
                                 </div>
                                 <div class="help-info"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p>Hari</p>
+                                    <select class="form-control show-tick" name="hari1">
+                                        <option></option>
+                                        <?php foreach($hari as $ha):?>
+                                            <?php if($ha == $pen['hari']){?>
+                                                <option value="<?= $ha;?>" selected><?= $ha;?></option>
+                                            <?php }else{?>
+                                                <option value="<?= $ha;?>"><?= $ha;?></option>
+                                            <?php }?>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <label class="form-label">Mulai</label>
+                                <div class="form-line">
+                                    <input type="time" class="form-control time24" name="mulai1" value="<?php $date = date("H:i", strtotime($pen['mulai'])); echo "$date"; ?>">
+                                </div>
+                                <div class="help-info"></div>
+                            </div>
+                            <div class="form-group form-float">
+                                <label class="form-label">Selesai</label>
+                                <div class="form-line">
+                                    <input type="time" class="form-control time24" name="selesai1" value="<?php $date = date("H:i", strtotime($pen['selesai'])); echo "$date"; ?>">
+                                </div>
+                                <div class="help-info"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p>Ruang</p>
+                                    <select class="form-control show-tick" name="ruang1">
+                                        <option></option>
+                                        <?php foreach($ruang as $ru):?>
+                                            <?php if($ru == $pen['ruang']){?>
+                                                <option value="<?= $ru;?>" selected><?= $ru;?></option>
+                                            <?php }else{?>
+                                                <option value="<?= $ru;?>"><?= $ru;?></option>
+                                            <?php }?>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-line">
@@ -226,7 +318,7 @@
                                         <option></option>
                                         <?php foreach($kelas as $kel):?>
                                             <?php if($kel == $pen['kelas']){?>
-                                                <option value="<?= $kel;?>"><?= $kel;?></option>
+                                                <option value="<?= $kel;?>" selected><?= $kel;?></option>
                                             <?php }else{?>
                                                 <option value="<?= $kel;?>"><?= $kel;?></option>
                                             <?php }?>
@@ -241,7 +333,7 @@
                                         <option></option>
                                         <?php foreach($semester as $sem):?>
                                             <?php if($sem == $pen['semester']){?>
-                                                <option value="<?= $sem;?>"><?= $sem;?></option>
+                                                <option value="<?= $sem;?>" selected><?= $sem;?></option>
                                             <?php }else{?>
                                                 <option value="<?= $sem;?>"><?= $sem;?></option>
                                             <?php }?>
