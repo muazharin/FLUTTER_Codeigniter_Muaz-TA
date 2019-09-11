@@ -59,20 +59,7 @@
     </div>
 </div>
 <!-- #END# Page Loader -->
-<!-- Overlay For Sidebars -->
 <div class="overlay"></div>
-<!-- #END# Overlay For Sidebars -->
-<!-- Search Bar -->
-<div class="search-bar">
-    <div class="search-icon">
-        <i class="material-icons">search</i>
-    </div>
-    <input type="text" placeholder="START TYPING...">
-    <div class="close-search">
-        <i class="material-icons">close</i>
-    </div>
-</div>
-<!-- #END# Search Bar -->
 <!-- Top Bar -->
 <nav class="navbar">
     <div class="container-fluid">
@@ -83,18 +70,13 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <!-- Call Search -->
-                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
-                <!-- #END# Call Search -->
-                
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
                         <i class="material-icons">more_vert</i>
                         <span class="label-count"></span>
                     </a>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                        <li role="separator" class="divider"></li>
+                        <!-- <li role="separator" class="divider"></li> -->
                         <li><a href="<?= base_url();?>login/logout" onclick="return confirm('Apakah Anda yakin ingin keluar?')"><i class="material-icons">input</i>Sign Out</a></li>
                     </ul>
                 </li>
@@ -109,7 +91,7 @@
         <!-- User Info -->
         <div class="user-info">
             <div class="image">
-                <img src="<?= base_url();?>assets/images/user.png" width="48" height="48" alt="User" />
+                <img src="<?= base_url();?>assets/images/<?= $this->session->userdata('foto');?>" width="48" height="48" alt="User" />
             </div>
             <div class="info-container">
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Muazharin Alfan</div>
@@ -120,7 +102,7 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">DAFTAR MENU</li>
                 <li id="menu1">
                     <a href="<?= base_url();?>">
                         <i class="material-icons">dashboard</i>

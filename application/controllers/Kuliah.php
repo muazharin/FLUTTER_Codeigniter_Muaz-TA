@@ -133,7 +133,7 @@ class Kuliah extends CI_Controller {
             $this->load->view('pages/kuliah_peminatan',$data);
             $this->load->view('template/footer',$data);
         }else{
-            $this->M_kuliah->tambahMkPeminatan();
+            $this->M_kuliah->editMkPeminatan();
             $this->session->set_flashdata('mk_peminatan', 'Ditambahkan');
             redirect('peminatan');
         }

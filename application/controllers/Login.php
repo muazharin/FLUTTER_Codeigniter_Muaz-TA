@@ -21,9 +21,13 @@ class Login extends CI_Controller {
                 $data = $valid->row_array();
                 $id = $data['id_admin'];
                 $user = $data['username'];
+                $pass = $data['password'];
+                $foto = $data['foto'];
                 $sesdata = [
                     'id_admin' => $id,
                     'username' => $user,
+                    'password' => $pass,
+                    'foto' => $foto,
                     'logged_in_admin' => true
                 ];
                 $this->session->set_userdata($sesdata);
