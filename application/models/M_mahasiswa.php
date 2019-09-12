@@ -7,6 +7,11 @@ class M_Mahasiswa extends CI_Model {
         return $this->db->get('tb_mhs')->result_array();
     }
     
+    public function getAllMhsNim($nim){
+        $this->db->where('nim', $nim);
+        return $this->db->get('tb_mhs')->result_array();
+    }
+    
     public function save($nim, $nama, $tempat_lahir, $tanggal_lahir, $image_name, $str){
         $this->load->library('upload');
         $config['upload_path'] = './assets/images/mahasiswa';

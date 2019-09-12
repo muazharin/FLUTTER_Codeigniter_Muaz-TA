@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            Tabel Mahasiswa
+                            TABEL ABSEN 
                         </h2>
                     </div>
                     <?php if(validation_errors()):?>
@@ -21,19 +21,82 @@
                         </div>
                     <?php endif;?>
                     <div class="body">
-                        <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#myForm"><i class="material-icons">add</i></button>
-                        <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button>
+                        <div class="row clearfix">
+                            <div class="col-md-12">
+                                <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                      <div class="form-group">
+                                            <div class="form-line">
+                                                <select class="form-control show-tick" name="matkul">
+                                                    <option>Mata Kuliah</option>
+                                                    <?php foreach($matkul as $mat):?>
+                                                        <option value="<?= $mat['nama_mata_kuliah'];?>"><?= $mat['nama_mata_kuliah'];?></option>
+                                                    <?php endforeach;?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                      <div class="form-group">
+                                            <div class="form-line">
+                                                <select class="form-control show-tick" name="kelas">
+                                                    <option>Kelas</option>
+                                                    <?php foreach($kelas as $kel):?>
+                                                        <option value="<?= $kel;?>"><?= $kel;?></option>
+                                                    <?php endforeach;?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">SUBMIT</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- <div class="col-md-4 ">
+                                <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">
+                                    <div class="col-lg-6 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="keyword" placeholder="Cari Mahasiswa" required>
+                                            </div>
+                                            <div class="help-info"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <button type="button" class="btn btn-primary btn-lg m-l-15 waves-effect">CARI</button>
+                                    </div>
+                                </form>
+                            </div> -->
+                        </div>
+                        <!-- <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button> -->
+                        <hr>
+                        <center><h5>MATA KULIAH <?= $judul_matkul;?> &nbsp; &nbsp;||&nbsp; &nbsp;KELAS <?= $judul_kelas;?></h5> </center> 
                         <hr>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="overflow: auto;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>QR Code</th>
-                                        <th>Aksi</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>%</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -41,9 +104,23 @@
                                         <th>No</th>
                                         <th>NIM</th>
                                         <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>QR Code</th>
-                                        <th>Aksi</th>
+                                        <th>1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
+                                        <th>7</th>
+                                        <th>8</th>
+                                        <th>9</th>
+                                        <th>10</th>
+                                        <th>11</th>
+                                        <th>12</th>
+                                        <th>13</th>
+                                        <th>14</th>
+                                        <th>15</th>
+                                        <th>16</th>
+                                        <th>%</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -51,14 +128,25 @@
                                     <?php foreach($absen as $ab): $i++?>
                                     <tr>
                                         <td><?= $i;?></td>
-                                        <td><?= $ab['nim'];?></td>
-                                        <td><?= $ab['nama'];?></td>
-                                        <td><img src="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto']; ?>" height="100px"></td>
-                                        <td><img src="<?= base_url();?>assets/images/qr_mhs/<?= $mhs['qr_code']; ?>" height="100px"></td>
-                                        <td>
-                                            <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myForm<?= $mhs['id_mhs'];?>"><i class="material-icons">mode_edit</i></button>
-                                            <a href="<?= base_url();?>mahasiswa/hapus/<?= $mhs['id_mhs'];?>/<?= $mhs['foto']?>/<?= $mhs['qr_code']?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>
-                                        </td>
+                                        <td> <a href="<?= base_url();?>mahasiswa/cariMahasiswa/<?= $ab['nim'];?>"><?= $ab['nim'];?></a> </td>
+                                        <td><?= $ab['nama_mhs'];?></td>
+                                        <td><?= $ab['per_satu'];?></td>
+                                        <td><?= $ab['per_dua'];?></td>
+                                        <td><?= $ab['per_tiga'];?></td>
+                                        <td><?= $ab['per_empat'];?></td>
+                                        <td><?= $ab['per_lima'];?></td>
+                                        <td><?= $ab['per_enam'];?></td>
+                                        <td><?= $ab['per_tujuh'];?></td>
+                                        <td><?= $ab['per_delapan'];?></td>
+                                        <td><?= $ab['per_sembilan'];?></td>
+                                        <td><?= $ab['per_sepuluh'];?></td>
+                                        <td><?= $ab['per_sebelas'];?></td>
+                                        <td><?= $ab['per_dua_belas'];?></td>
+                                        <td><?= $ab['per_tiga_belas'];?></td>
+                                        <td><?= $ab['per_empat_belas'];?></td>
+                                        <td><?= $ab['per_lima_belas'];?></td>
+                                        <td><?= $ab['per_enam_belas'];?></td>
+                                        <td><?= $ab['persentase'];?></td>
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -71,145 +159,3 @@
         <!-- #END# Basic Examples -->
     </div>
 </section>
-
-<!-- Modal -->
-<div id="myForm" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <!-- <h4 class="modal-title">Modal Header</h4> -->
-      </div>
-      <div class="modal-body">
-        <!-- Horizontal Layout -->
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>
-                            Tambah Data Mahasiswa
-                        </h2>
-                    </div>
-                    <div class="body">
-                        <!-- Advanced Validation -->
-                        <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">
-                            <div class="form-group form-float">
-                                <label class="form-label">NIM</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Nama</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Mahasiswa" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Tempat Lahir</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Tanggal Lahir</label>
-                                <div class="form-line">
-                                    <input type="date" class="form-control" name="tanggal_lahir" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Foto</label>
-                                <div class="form-line">
-                                    <input type="file" class="form-control" name="foto" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <button class="btn btn-primary waves-effect" type="submit">Tambah</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- #END# Horizontal Layout -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<?php foreach($mahasiswa as $mhs): ?>
-<!-- Modal -->
-<div id="myForm<?= $mhs['id_mhs'];?>" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <!-- <h4 class="modal-title">Modal Header</h4> -->
-      </div>
-      <div class="modal-body">
-        <!-- Horizontal Layout -->
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>
-                            Tambah Data Mahasiswa
-                        </h2>
-                    </div>
-                    <div class="body">
-                        <!-- Advanced Validation -->
-                        <form id="form_advanced_validation" method="post" action="mahasiswa/edit" enctype="multipart/form-data">
-                            <div class="form-group form-float">
-                                <label class="form-label">NIM</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="nim1" value="<?= $mhs['nim'];?>"  required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Nama</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="nama1" value="<?= $mhs['nama'];?>" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Tempat Lahir</label>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" name="tempat_lahir1" value="<?= $mhs['tmpt_lahir'];?>" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Tanggal Lahir</label>
-                                <div class="form-line">
-                                    <input type="date" class="form-control" name="tanggal_lahir1" value="<?= $mhs['tgl_lahir'];?>" required>
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <div class="form-group form-float">
-                                <label class="form-label">Foto</label>
-                                <div class="form-line">
-                                    <input type="file" class="form-control" name="foto1">
-                                </div>
-                                <div class="help-info"></div>
-                            </div>
-                            <input type="hidden" class="form-control" name="fotolama1" value="<?= $mhs['foto'];?>" required>
-                            <input type="hidden" class="form-control" name="id_mhs1" value="<?= $mhs['id_mhs'];?>" required>
-                            <button class="btn btn-primary waves-effect" type="submit">Perbarui</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- #END# Horizontal Layout -->
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach;?>

@@ -92,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-12 col-md-8 col-lg-6">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs tab-nav-right" role="tablist">
                             <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">DATA</a></li>
