@@ -59,7 +59,7 @@
                                         <td><?= $i;?></td>
                                         <td><?= $mhs['nim'];?></td>
                                         <td><?= $mhs['nama'];?></td>
-                                        <td><img src="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto']; ?>" height="100px"></td>
+                                        <td> <a href="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto'];?>" target="_blank"> <img src="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto']; ?>" height="100px"></a></td>
                                         <td><img src="<?= base_url();?>assets/images/qr_mhs/<?= $mhs['qr_code']; ?>" height="100px"></td>
                                         <td>
                                             <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myForm<?= $mhs['id_mhs'];?>"><i class="material-icons">mode_edit</i></button>
