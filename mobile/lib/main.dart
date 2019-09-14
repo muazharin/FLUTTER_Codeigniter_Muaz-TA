@@ -1,63 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/form/formCardLogin.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(new MaterialApp(
+    home: new MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return new SplashScreen(
+        imageBackground: new AssetImage('img/teknik.png'),
+        seconds: 5,
+        navigateAfterSeconds: new AfterSplash(),
+        loaderColor: Colors.red);
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance =
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+    return new Scaffold(
+      backgroundColor: Colors.amber,
+      resizeToAvoidBottomPadding: false,
+      body: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Expanded(
+                child: Container(),
+              ),
+              Image.asset('img/image_02.png', color: Colors.white)
+            ],
+          ),
+          SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(200)),
+                    FormCardLogin(),
+                  ],
+                )),
+          )
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
