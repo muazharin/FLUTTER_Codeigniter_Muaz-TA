@@ -16,7 +16,7 @@ class M_Mahasiswa extends CI_Model {
         $this->load->library('upload');
         $config['upload_path'] = './assets/images/mahasiswa';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
-        $config['max_size'] = '2048';  //2MB max
+        $config['max_size'] = '5020';  //2MB max
         // $config['max_width'] = '4480'; // pixel
         // $config['max_height'] = '4480'; // pixel
         $config['file_name'] = $this->input->post('nim');
@@ -117,7 +117,7 @@ class M_Mahasiswa extends CI_Model {
         $this->load->library('upload');
         $config['upload_path'] = './assets/images/mahasiswa';
         $config['allowed_types'] = 'jpg|png|jpeg|gif';
-        $config['max_size'] = '2048';  //2MB max
+        $config['max_size'] = '5020';  //2MB max
         // $config['max_width'] = '4480'; // pixel
         // $config['max_height'] = '4480'; // pixel
         $config['file_name'] = $this->input->post('nim');
