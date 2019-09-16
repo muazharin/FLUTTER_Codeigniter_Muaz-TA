@@ -47,6 +47,8 @@ flutter:
     - img/teknik1.png
     - img/image_02.png
     - img/logo.png
+    - img/wa.jpg
+    - img/we.png
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

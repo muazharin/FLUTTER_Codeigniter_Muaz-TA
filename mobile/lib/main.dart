@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile/form/formCardLogin.dart';
 import 'package:mobile/form/formValidation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -25,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new SplashScreen(
         imageBackground: new AssetImage('img/teknik.png'),
-        seconds: 5,
+        seconds: 3,
         navigateAfterSeconds: new AfterSplash(),
         loaderColor: Colors.red);
   }
@@ -35,6 +34,8 @@ class AfterSplash extends StatefulWidget {
   @override
   _AfterSplashState createState() => _AfterSplashState();
 }
+
+enum LoginStatus { notSignIn, signIn }
 
 class _AfterSplashState extends State<AfterSplash> {
   LoginStatus _loginStatus = LoginStatus.notSignIn;
@@ -50,15 +51,11 @@ class _AfterSplashState extends State<AfterSplash> {
   }
 
   login() async {
-    // new Column(
-    //   mainAxisAlignment: MainAxisAlignment.end,
-    //   children: <Widget>[new CircularProgressIndicator()],
-    // );
     if (_key.currentState.validate()) {
       _key.currentState.save();
       final response = await http.post('http://192.168.1.128/muaz_ta/api/login',
           body: {'username': _username, 'password': _password});
-      var datausr = json.decode(response.body);
+      var datausr = jsonDecode(response.body);
       int value = datausr[0]['value'];
       String status = datausr[0]['status'];
       if (value == 1) {
@@ -67,8 +64,23 @@ class _AfterSplashState extends State<AfterSplash> {
           savePref(value);
         });
       } else {
-        _loginStatus = LoginStatus.notSignIn;
-        print(status);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: new Text("Login"),
+              content: new Text("Username atau password anda salah!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     }
   }
@@ -85,15 +97,23 @@ class _AfterSplashState extends State<AfterSplash> {
   getPref() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      value = sharedPreferences.getInt(value);
+      value = sharedPreferences.getInt('value');
 
       _loginStatus = value == 1 ? LoginStatus.signIn : LoginStatus.notSignIn;
     });
   }
 
+  signOut() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      sharedPreferences.setInt("value", null);
+      sharedPreferences.commit();
+      _loginStatus = LoginStatus.notSignIn;
+    });
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getPref();
   }
@@ -276,7 +296,7 @@ class _AfterSplashState extends State<AfterSplash> {
         );
         break;
       case LoginStatus.signIn:
-        return MainMenu();
+        return MainMenu(signOut);
         break;
     }
   }
