@@ -9,7 +9,7 @@ class Api extends CI_Controller {
         $qwe = $this->db->query('SELECT * FROM tb_admin WHERE username = "'.$username.'" AND password = "'.$password.'"');
         // $qwe = $this->db->query('SELECT * FROM tb_admin ');
         if($qwe->num_rows() <= 0){
-            $data = [
+            $data[]= [
                 'value' => 0,
                 'status' => 'login_gagal',
             ];

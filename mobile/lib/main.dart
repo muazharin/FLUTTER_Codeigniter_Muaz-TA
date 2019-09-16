@@ -6,12 +6,25 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobile/pages/menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mobile/pages/kelas_minat.dart';
 
-void main() {
-  runApp(new MaterialApp(
-    home: new MyApp(),
-    debugShowCheckedModeBanner: false,
-  ));
+void main() => runApp(MyApp1());
+
+class MyApp1 extends StatefulWidget {
+  @override
+  _MyApp1State createState() => _MyApp1State();
+}
+
+class _MyApp1State extends State<MyApp1> {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+        home: new MyApp(),
+        debugShowCheckedModeBanner: false,
+        routes: <String, WidgetBuilder>{
+          '/minat': (BuildContext context) => new KelasMinat(),
+        });
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -59,17 +72,19 @@ class _AfterSplashState extends State<AfterSplash> {
       int value = datausr[0]['value'];
       String status = datausr[0]['status'];
       if (value == 1) {
+        print(value);
         setState(() {
           _loginStatus = LoginStatus.signIn;
           savePref(value);
         });
       } else {
+        print(value);
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: new Text("Login"),
-              content: new Text("Username atau password anda salah!"),
+              content: new Text("Username atau Password Anda Salah!"),
               actions: <Widget>[
                 new FlatButton(
                   child: new Text("Close"),

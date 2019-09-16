@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/model/constant.dart';
 import 'dart:convert';
+import 'package:mobile/model/navigationRoutes.dart';
+import 'package:mobile/model/util.dart';
 
 String peminatanJson =
     '{"menuPeminatan":[{"item":"RPL","foto":"rpl.png"},{"item":"KCV","foto":"kcv.png"},{"item":"KBJ","foto":"kbj.png"}]}';
@@ -34,9 +36,34 @@ class _MainMenuState extends State<MainMenu> {
   void pilihAksi(String pilih) {
     switch (pilih) {
       case Constant.signOut:
-        setState(() {
-          widget.signOut();
-        });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              // return object of type Dialog
+              return AlertDialog(
+                title: new Text("Exit"),
+                content: new Text("Do you really want to exit?"),
+                actions: <Widget>[
+                  // usually buttons at the bottom of the dialog
+                  new FlatButton(
+                    child: new Text("Cancel"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  new FlatButton(
+                    child: new Text("Yes"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      widget.signOut();
+                    },
+                  )
+                ],
+              );
+            });
+        // setState(() {
+        //   widget.signOut();
+        // });
         break;
       default:
     }
@@ -83,14 +110,36 @@ class _MainMenuState extends State<MainMenu> {
                       itemBuilder: (context, index) {
                         Map<String, String> minat =
                             peminatan[index].cast<String, String>();
+                        void kelasm() {
+                          switch (minat['item']) {
+                            case "RPL":
+                              setState(() {
+                                Util.kelasminat = "RPL";
+                              });
+                              NavigationRoutes.switchToKelasMinat(context);
+                              break;
+                            case "KCV":
+                              setState(() {
+                                Util.kelasminat = "KCV";
+                              });
+                              NavigationRoutes.switchToKelasMinat(context);
+                              break;
+                            case "KBJ":
+                              setState(() {
+                                Util.kelasminat = "KBJ";
+                              });
+                              NavigationRoutes.switchToKelasMinat(context);
+                              break;
+                            default:
+                          }
+                        }
+
                         return Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Card(
                             color: Colors.blue[300],
                             child: InkWell(
-                              onTap: () {
-                                print(minat['item']);
-                              },
+                              onTap: kelasm,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
@@ -136,7 +185,7 @@ class _MainMenuState extends State<MainMenu> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
-                        color: Colors.amber,
+                        color: Colors.white,
                         child: InkWell(
                           onTap: () {
                             print(antar['semester']);
@@ -167,7 +216,7 @@ class _MainMenuState extends State<MainMenu> {
                                           child: Text(
                                         "Semester " + antar['semester'],
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.amber,
                                             fontWeight: FontWeight.bold),
                                       )),
                                     ),
