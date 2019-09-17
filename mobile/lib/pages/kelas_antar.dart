@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:mobile/model/util.dart';
 import 'package:mobile/model/siderbar.dart';
 
-class KelasMinat extends StatefulWidget {
+class KelasAntar extends StatefulWidget {
   @override
-  _KelasMinatState createState() => _KelasMinatState();
+  _KelasAntarState createState() => _KelasAntarState();
 }
 
-class _KelasMinatState extends State<KelasMinat> {
+class _KelasAntarState extends State<KelasAntar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            Util.kelasminat + "_Semester " + Util.semester_minat.toString()),
+        title: Text("Semester " +
+            Util.semester_antar.toString() +
+            "(" +
+            Util.kelasantar +
+            ")"),
         backgroundColor: Colors.amber,
       ),
       drawer: Sidebar(),
