@@ -7,7 +7,6 @@ class Api extends CI_Controller {
         $username = $this->input->post('username',true);
         $password = md5($this->input->post('password',true));
         $qwe = $this->db->query('SELECT * FROM tb_admin WHERE username = "'.$username.'" AND password = "'.$password.'"');
-        // $qwe = $this->db->query('SELECT * FROM tb_admin ');
         if($qwe->num_rows() <= 0){
             $data[]= [
                 'value' => 0,
@@ -25,22 +24,25 @@ class Api extends CI_Controller {
                     'foto' => $r->foto,
                 ];    
             }
-            // $data['post'] = $post;
-            // $data = [
-            //     'value' => 1,
-            //     'status' => 'login_berhasil',
-            //     'body' => $qwe->result_array()
-            // ];
         }
         echo json_encode($data);
     }
 
     public function mata_kuliah_pengantar(){
-        $semester = $this->input->post('semester', true);
-        if($this->input->post('logged_in_admin') != TRUE){
-            echo "salah";
-		}else{
-            $api = $this->db->query('SELECT * FROM tb_mata_kuliah_pengantar WHERE semester = "'.$semester.'"')->result();
+        $semester = $this->input->post("semester", true);
+        $kelas = $this->input->post("kelas", true);
+        $qwe = $this->db->query('SELECT * FROM tb_mata_kuliah_pengantar WHERE semester = "'.$semester.'" AND kelas = "'.$kelas.'"')->result();
+        $api = array();
+        foreach($qwe as $q){
+            $api[] = [
+                'kodematakuliah' => $q->kode_mata_kuliah,
+                'namamatakuliah' => $q->nama_mata_kuliah,
+                'dosensatu' => $q->dosen_satu,
+                'hari' => $q->hari,
+                'mulai' => $q->mulai,
+                'selesai' => $q->selesai,
+                'ruang' => $q->ruang,
+            ];
         }
         echo json_encode($api);
     }
