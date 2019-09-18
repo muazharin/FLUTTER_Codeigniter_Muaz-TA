@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile/pages/kelas_minat.dart';
 import 'package:mobile/pages/kelas_antar.dart';
 import 'package:mobile/model/baseurl.dart';
+import 'package:mobile/model/util.dart';
+import 'package:mobile/pages/scanantar.dart';
 
 void main() => runApp(MyApp1());
 
@@ -26,6 +28,7 @@ class _MyApp1State extends State<MyApp1> {
         routes: <String, WidgetBuilder>{
           '/minat': (BuildContext context) => new KelasMinat(),
           '/antar': (BuildContext context) => new KelasAntar(),
+          '/scanantar': (BuildContext context) => new ScanAntar(),
         });
   }
 }
@@ -129,7 +132,18 @@ class _AfterSplashState extends State<AfterSplash> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       sharedPreferences.setInt("value", null);
+      sharedPreferences.setString("username", null);
+      sharedPreferences.setString("foto", null);
       sharedPreferences.commit();
+      Util.value = 0;
+      Util.username = '';
+      Util.foto = '';
+      Util.status = '';
+      Util.kelasminat = '';
+      Util.kelasantar = 'ganjil';
+      Util.semesterminat = 5;
+      Util.semesterantar = 1;
+      Util.sidebar = '';
       _loginStatus = LoginStatus.notSignIn;
     });
   }

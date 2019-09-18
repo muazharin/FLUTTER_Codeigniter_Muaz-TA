@@ -23,7 +23,6 @@ class _MainMenuState extends State<MainMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     Map<String, dynamic> decodedPeminatan = json.decode(peminatanJson);
@@ -148,7 +147,7 @@ class _MainMenuState extends State<MainMenu> {
                           return Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Card(
-                              color: Colors.blue[300],
+                              color: Colors.white,
                               child: InkWell(
                                 onTap: kelasm,
                                 child: Padding(
@@ -197,28 +196,28 @@ class _MainMenuState extends State<MainMenu> {
                         switch (int.parse(antar['semester'])) {
                           case 1:
                             setState(() {
-                              Util.semester_antar = 1;
+                              Util.semesterantar = 1;
                               Util.sidebar = "antar";
                             });
                             NavigationRoutes.switchToKelasAntar(context);
                             break;
                           case 2:
                             setState(() {
-                              Util.semester_antar = 2;
+                              Util.semesterantar = 2;
                               Util.sidebar = "antar";
                             });
                             NavigationRoutes.switchToKelasAntar(context);
                             break;
                           case 3:
                             setState(() {
-                              Util.semester_antar = 3;
+                              Util.semesterantar = 3;
                               Util.sidebar = "antar";
                             });
                             NavigationRoutes.switchToKelasAntar(context);
                             break;
                           case 4:
                             setState(() {
-                              Util.semester_antar = 4;
+                              Util.semesterantar = 4;
                               Util.sidebar = "antar";
                             });
                             NavigationRoutes.switchToKelasAntar(context);
@@ -259,7 +258,7 @@ class _MainMenuState extends State<MainMenu> {
                                             child: Text(
                                           "Semester " + antar['semester'],
                                           style: TextStyle(
-                                              color: Colors.amber,
+                                              color: Colors.black54,
                                               fontWeight: FontWeight.bold),
                                         )),
                                       ),

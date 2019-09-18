@@ -5,7 +5,8 @@ class Util {
   static String status = '';
   static String kelasminat = '';
   static String kelasantar = 'ganjil';
-  static int semester_minat = 5;
-  static int semester_antar = 1;
+  static int semesterminat = 5;
+  static int semesterantar = 1;
   static String sidebar = '';
+  static String mk = '';
 }

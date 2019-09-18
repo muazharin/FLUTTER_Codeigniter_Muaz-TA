@@ -13,7 +13,7 @@ class _KelasMinatState extends State<KelasMinat> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            Util.kelasminat + "_Semester " + Util.semester_minat.toString()),
+            Util.kelasminat + "_Semester " + Util.semesterminat.toString()),
         backgroundColor: Colors.amber,
       ),
       drawer: Sidebar(),

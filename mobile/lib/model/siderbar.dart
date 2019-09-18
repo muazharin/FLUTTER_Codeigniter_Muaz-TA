@@ -20,7 +20,6 @@ class _SidebarState extends State<Sidebar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getPref();
   }
@@ -53,7 +52,7 @@ class _SidebarState extends State<Sidebar> {
                         trailing: Icon(Icons.arrow_right),
                         onTap: () {
                           setState(() {
-                            Util.semester_minat = 5;
+                            Util.semesterminat = 5;
                           });
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -66,7 +65,7 @@ class _SidebarState extends State<Sidebar> {
                         trailing: Icon(Icons.arrow_right),
                         onTap: () {
                           setState(() {
-                            Util.semester_minat = 6;
+                            Util.semesterminat = 6;
                           });
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -79,7 +78,7 @@ class _SidebarState extends State<Sidebar> {
                         trailing: Icon(Icons.arrow_right),
                         onTap: () {
                           setState(() {
-                            Util.semester_minat = 7;
+                            Util.semesterminat = 7;
                           });
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -92,7 +91,7 @@ class _SidebarState extends State<Sidebar> {
                         trailing: Icon(Icons.arrow_right),
                         onTap: () {
                           setState(() {
-                            Util.semester_minat = 8;
+                            Util.semesterminat = 8;
                           });
                           Navigator.pop(context);
                           Navigator.pop(context);

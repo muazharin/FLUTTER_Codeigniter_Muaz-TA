@@ -8,4 +8,8 @@ class NavigationRoutes {
   static void switchToKelasAntar(BuildContext context) {
     Navigator.pushNamed(context, '/antar');
   }
+
+  static void switchToScanAntar(BuildContext context) {
+    Navigator.pushNamed(context, '/scanantar');
+  }
 }

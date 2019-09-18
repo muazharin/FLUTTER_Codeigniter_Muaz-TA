@@ -46,4 +46,11 @@ class Api extends CI_Controller {
         }
         echo json_encode($api);
     }
+
+    public function absen(){
+        $namamatakuliah = $this->input->post("nama_mata_kuliah", true);
+        $kelas = $this->input->post("kelas", true);
+        $qwe = $this->db->query('SELECT * FROM ');
+
+    }
 }

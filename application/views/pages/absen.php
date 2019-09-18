@@ -146,7 +146,7 @@
                                         <td><?= $ab['per_empat_belas'];?></td>
                                         <td><?= $ab['per_lima_belas'];?></td>
                                         <td><?= $ab['per_enam_belas'];?></td>
-                                        <td><?= $ab['persentase'];?></td>
+                                        <td><?= ($ab['persentase']/16)*100;?></td>
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>
