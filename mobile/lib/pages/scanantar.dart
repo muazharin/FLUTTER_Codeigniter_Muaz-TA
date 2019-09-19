@@ -5,6 +5,9 @@ import 'package:mobile/model/mhspengantar.dart';
 import 'package:mobile/model/baseurl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:simple_permissions/simple_permissions.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
 
 class ScanAntar extends StatefulWidget {
   @override
@@ -26,8 +29,10 @@ class _ScanAntarState extends State<ScanAntar>
   var loading = false;
   var notfound = false;
   final listmhs = new List<MhsPengantar>();
+  final GlobalKey<RefreshIndicatorState> _refresh =
+      new GlobalKey<RefreshIndicatorState>();
 
-  _tampilmhs() async {
+  Future<void> _tampilmhs() async {
     listmhs.clear();
     setState(() {
       loading = true;
@@ -120,7 +125,7 @@ class _ScanAntarState extends State<ScanAntar>
     return Container(
       child: FloatingActionButton(
         heroTag: "btnProfile",
-        onPressed: null,
+        onPressed: scan,
         tooltip: 'Profile',
         child: Icon(Icons.person_add),
       ),
@@ -141,72 +146,124 @@ class _ScanAntarState extends State<ScanAntar>
     );
   }
 
+  String _barcodeString = '';
+  Permission permission = Permission.Camera;
+
+  requestPermission() async {
+    bool result =
+        (await SimplePermissions.requestPermission(permission)) as bool;
+    return result;
+  }
+
+  void insert(String _barcodeString) {
+    http.post(Baseurl.insertabsenpengantar, body: {
+      'barcode': _barcodeString,
+      'mk': Util.mk,
+      'kelas': Util.kelasantar
+    });
+    _tampilmhs();
+  }
+
+  scan() async {
+    try {
+      String reader = await BarcodeScanner.scan();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _barcodeString = reader;
+      });
+      insert(_barcodeString);
+      print("String = " + _barcodeString);
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
+        requestPermission();
+      } else {
+        setState(() => _barcodeString = "unknown error : $e");
+      }
+    } on FormatException {
+      setState(() => _barcodeString = "user return without scanning");
+    } catch (e) {
+      setState(() => _barcodeString = "unknown error : $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(Util.mk), backgroundColor: Colors.amber),
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('img/we.png'), fit: BoxFit.cover)),
-          child: loading
-              ? Center(child: CircularProgressIndicator())
-              : notfound
-                  ? Center(child: Text("No Data Found"))
-                  : ListView.separated(
-                      separatorBuilder: (context, index) => Divider(
-                            color: Colors.black,
-                          ),
-                      itemCount: listmhs.length,
-                      itemBuilder: (context, i) {
-                        final res = listmhs[i];
-                        int p = int.parse(res.persentase);
-                        return Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 0.0),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Container(
-                                      // width: 20,
-                                      height: 20,
-
-                                      decoration: BoxDecoration(
-                                          image: new DecorationImage(
-                                              image: new NetworkImage(Baseurl
-                                                      .ip +
-                                                  'assets/images/mahasiswa' +
-                                                  res.foto))),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(res.nama,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          Text(res.nim),
-                                        ],
-                                      ),
-                                    ),
-                                    IconButton(
-                                          onPressed: null,
-                                      icon: p <= 13
-                                          ? Icon(Icons.arrow_right)
-                                          : Icon(Icons.arrow_left),
-                                    )
-                                  ],
-                                )
-                              ],
+      body: RefreshIndicator(
+        onRefresh: _tampilmhs,
+        key: _refresh,
+        child: SafeArea(
+          child: Container(
+            child: loading
+                ? Center(child: CircularProgressIndicator())
+                : notfound
+                    ? Center(child: Text("No Data Found!"))
+                    : ListView.separated(
+                        separatorBuilder: (context, index) => Divider(
+                              color: Colors.black,
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                        itemCount: listmhs.length,
+                        itemBuilder: (context, i) {
+                          final res = listmhs[i];
+                          int p = int.parse(res.persentase);
+                          return Container(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: new DecorationImage(
+                                                  fit: BoxFit.contain,
+                                                  image: new NetworkImage(Baseurl
+                                                          .ip +
+                                                      '/muaz_ta/assets/images/mahasiswa/' +
+                                                      res.foto))),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(res.nama,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.0)),
+                                            Text(res.nim),
+                                          ],
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: null,
+                                        icon: p <= 13
+                                            ? Icon(
+                                                Icons.info_outline,
+                                                color: Colors.red,
+                                              )
+                                            : Icon(Icons.info_outline,
+                                                color: Colors.green),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+          ),
         ),
       ),
       floatingActionButton: Padding(

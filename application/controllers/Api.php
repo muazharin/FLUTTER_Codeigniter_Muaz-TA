@@ -47,10 +47,59 @@ class Api extends CI_Controller {
         echo json_encode($api);
     }
 
+    public function insertabsenpengantar(){
+        $this->load->library('kripto');
+
+        $barcode = $this->input->post("barcode",true);
+        $kelas = $this->input->post("kelas",true);
+        $mk = $this->input->post("mk",true);
+        $hasilbase = base64_decode($barcode);
+        $len = strlen($hasilbase);
+        $key = substr($hasilbase,'0','5');
+        $str = substr($hasilbase,'5',$len);
+        $data = $this->kripto->rc4($key, $str);
+        $qwe = $this->db->query('SELECT * FROM tb_mhs WHERE kode_unik = "'.$data.'"')->result();
+        $api = array();
+        foreach($qwe as $q){
+            $api=[
+                'nim' => $q->nim,
+                'nama_mhs' => $q->nama,
+                'nama_mata_kuliah' => $mk,
+                'kelas' => $kelas,
+                'persentase' => '0',
+            ];
+        }
+        $cek = $this->db->query('SELECT * FROM tb_asben WHERE nim = "'.$api['nim'].'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kelas.'"')->result();
+        echo $cek->num_row();
+        // if($this->db->insert('tb_absen', $api)){
+        //     echo "berhasil!";
+        // }
+        
+        
+        // echo json_encode($api).' | ';
+        // echo $api['nim'].' | ';
+        // echo $data.' | ';
+        // echo $str.' | ';
+        // echo $key.' | ';
+        // echo $len.' | ';
+        // echo $hasilbase;
+        
+    }
+
     public function absen(){
         $namamatakuliah = $this->input->post("nama_mata_kuliah", true);
         $kelas = $this->input->post("kelas", true);
-        $qwe = $this->db->query('SELECT * FROM ');
+        $qwe = $this->db->query('SELECT a.nim, a.nama_mhs, a.persentase, m.foto FROM tb_absen a LEFT JOIN tb_mhs m on a.nim = m.nim WHERE a.nama_mata_kuliah = "'.$namamatakuliah.'" AND a.kelas = "'.$kelas.'" ORDER BY nim ASC')->result();
+        $api = array();
+        foreach($qwe as $w){
+            $api[] = [
+                'nim' => $w->nim,
+                'nama' => $w->nama_mhs,
+                'persentase' => $w->persentase,
+                'foto' => $w->foto
+            ];
+        }
+        echo json_encode($api);
 
     }
 }
