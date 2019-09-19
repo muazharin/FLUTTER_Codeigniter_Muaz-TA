@@ -16,6 +16,28 @@ class ScanAntar extends StatefulWidget {
 
 class _ScanAntarState extends State<ScanAntar>
     with SingleTickerProviderStateMixin {
+  // static int cek1 = Util.cek1;
+  // static int cek2 = Util.cek2;
+  // static int cek3 = Util.cek3;
+  // static int cek4 = Util.cek4;
+  // static int cek5 = Util.cek5;
+  // static int cek6 = Util.cek6;
+  // static int cek7 = Util.cek7;
+  // static int cek8 = Util.cek8;
+  // static int cek9 = Util.cek9;
+  // static int cek10 = Util.cek10;
+  // static int cek11 = Util.cek11;
+  // static int cek12 = Util.cek12;
+  // static int cek13 = Util.cek13;
+  // static int cek14 = Util.cek14;
+  // static int cek15 = Util.cek15;
+  // static int cek16 = Util.cek16;
+  // String pertemuanJson =
+  //     '{"menuAbsen":[{"pertemuan":"1","per":"satu","jml":"$cek1"},{"pertemuan":"2","per":"dua","jml":"$cek2"},{"pertemuan":"3","per":"tiga","jml":"$cek3"},{"pertemuan":"4","per":"empat","jml":"$cek4"},{"pertemuan":"5","per":"lima","jml":"$cek5"},{"pertemuan":"6","per":"enam","jml":"$cek6"},{"pertemuan":"7","per":"tujuh","jml":"$cek7"},{"pertemuan":"8","per":"delapan","jml":"$cek8"},{"pertemuan":"9","per":"sembilan","jml":"$cek9"},{"pertemuan":"10","per":"sepuluh","jml":"$cek10"},{"pertemuan":"11","per":"sebelas","jml":"$cek11"},{"pertemuan":"12","per":"dua_belas","jml":"$cek12"},{"pertemuan":"13","per":"tiga_belas","jml":"$cek13"},{"pertemuan":"14","per":"empat_belas","jml":"$cek14"},{"pertemuan":"15","per":"lima_belas","jml":"$cek15"},{"pertemuan":"16","per":"enam_belas","jml":"$cek16"}]}';
+  String pertemuanJson =
+      '{"menuAbsen":[{"pertemuan":"1","per":"satu"},{"pertemuan":"2","per":"dua"},{"pertemuan":"3","per":"tiga"},{"pertemuan":"4","per":"empat"},{"pertemuan":"5","per":"lima"},{"pertemuan":"6","per":"enam"},{"pertemuan":"7","per":"tujuh"},{"pertemuan":"8","per":"delapan"},{"pertemuan":"9","per":"sembilan"},{"pertemuan":"10","per":"sepuluh"},{"pertemuan":"11","per":"sebelas"},{"pertemuan":"12","per":"dua_belas"},{"pertemuan":"13","per":"tiga_belas"},{"pertemuan":"14","per":"empat_belas"},{"pertemuan":"15","per":"lima_belas"},{"pertemuan":"16","per":"enam_belas"}]}';
+  final ScrollController _scrollController = ScrollController();
+  List<dynamic> pertemuan;
   // variabel animasi floatbutton
   bool isOpened = false;
   AnimationController _animationController;
@@ -59,9 +81,36 @@ class _ScanAntarState extends State<ScanAntar>
     }
   }
 
+  _cekpertemuan() async {
+    final responsecek = await http.post(Baseurl.cekpertemuan,
+        body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasantar});
+    var datacek = jsonDecode(responsecek.body);
+    setState(() {
+      Util.cek1 = datacek['cek1'];
+      Util.cek2 = datacek['cek2'];
+      Util.cek3 = datacek['cek3'];
+      Util.cek4 = datacek['cek4'];
+      Util.cek5 = datacek['cek5'];
+      Util.cek6 = datacek['cek6'];
+      Util.cek7 = datacek['cek7'];
+      Util.cek8 = datacek['cek8'];
+      Util.cek9 = datacek['cek9'];
+      Util.cek10 = datacek['cek10'];
+      Util.cek11 = datacek['cek11'];
+      Util.cek12 = datacek['cek12'];
+      Util.cek13 = datacek['cek13'];
+      Util.cek14 = datacek['cek14'];
+      Util.cek15 = datacek['cek15'];
+      Util.cek16 = datacek['cek16'];
+    });
+  }
+
   @override
   void initState() {
+    _cekpertemuan();
     _tampilmhs();
+    Map<String, dynamic> decodedPertemuan = json.decode(pertemuanJson);
+    pertemuan = decodedPertemuan['menuAbsen'];
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500))
           ..addListener(() {
@@ -113,8 +162,205 @@ class _ScanAntarState extends State<ScanAntar>
     return Container(
       child: FloatingActionButton(
         heroTag: "btnScan",
-        // onPressed: scan,
-        onPressed: null,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                // title: new Text("Login"),
+                content: new Container(
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    slivers: <Widget>[
+                      SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            Map<String, String> temu =
+                                pertemuan[index].cast<String, String>();
+
+                            void absendata(
+                                String ab, String nim, String nama) async {
+                              final r = await http.post(Baseurl.absenmi, body: {
+                                'nim': nim,
+                                'nama': nama,
+                                'ket': ab,
+                                'per': temu['pertemuan'],
+                                'mk': Util.mk,
+                                'kls': Util.kelasantar
+                              });
+                            }
+
+                            void update(String _barcodeString) async {
+                              final res = await http
+                                  .post(Baseurl.updateabsenpengantar, body: {
+                                'barcode': _barcodeString,
+                              });
+                              var datains = jsonDecode(res.body);
+                              // String mes = datains['pes'];
+                              String nim = datains['nim'];
+                              String nama = datains['nama'];
+                              String foto = datains['foto'];
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: new Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Flexible(
+                                            flex: 2,
+                                            child: Image.network(Baseurl.ip +
+                                                "/muaz_ta/assets/images/mahasiswa/" +
+                                                foto),
+                                          ),
+                                          Flexible(
+                                            flex: 1,
+                                            child: Text(nim),
+                                          ),
+                                          Flexible(
+                                            flex: 1,
+                                            child: Text(nama),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      new Container(
+                                        child: Row(
+                                          children: <Widget>[
+                                            new RaisedButton(
+                                              child: new Text("H",
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                              onPressed: () {
+                                                String ab = 'h';
+                                                absendata(ab, nim, nama);
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            new RaisedButton(
+                                              child: new Text("A",
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                              onPressed: () {
+                                                String ab = 'a';
+                                                absendata(ab, nim, nama);
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            new RaisedButton(
+                                              child: new Text(
+                                                "I",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              onPressed: () {
+                                                String ab = 'i';
+                                                absendata(ab, nim, nama);
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            new RaisedButton(
+                                              child: new Text("S",
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                              onPressed: () {
+                                                String ab = 's';
+                                                absendata(ab, nim, nama);
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+
+                            scanup() async {
+                              try {
+                                String reader = await BarcodeScanner.scan();
+                                if (!mounted) {
+                                  return;
+                                }
+                                setState(() {
+                                  _barcodeString = reader;
+                                });
+                                update(_barcodeString);
+                                print("String = " + _barcodeString);
+                              } on PlatformException catch (e) {
+                                if (e.code ==
+                                    BarcodeScanner.CameraAccessDenied) {
+                                  requestPermission();
+                                } else {
+                                  setState(() =>
+                                      _barcodeString = "unknown error : $e");
+                                }
+                              } on FormatException {
+                                setState(() => _barcodeString =
+                                    "user return without scanning");
+                              } catch (e) {
+                                setState(() =>
+                                    _barcodeString = "unknown error : $e");
+                              }
+                            }
+
+                            return Center(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Card(
+                                    color: Colors.white,
+                                    child: Center(
+                                      child: InkWell(
+                                        onTap: scanup,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Center(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Center(
+                                                    child: Text(
+                                                  temu['pertemuan'],
+                                                  style: TextStyle(
+                                                    fontSize: 36.0,
+                                                    // color: Util.cek == 0
+                                                    //     ? Colors.black
+                                                    //     : Colors.green
+                                                  ),
+                                                )),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            );
+                          },
+                          childCount: pertemuan.length,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("Close"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
         tooltip: 'Scan',
         child: Icon(Icons.camera_alt),
       ),

@@ -9,4 +9,21 @@ class Util {
   static int semesterantar = 1;
   static String sidebar = '';
   static String mk = '';
+  static String cek = '';
+  static int cek1 = 0;
+  static int cek2 = 0;
+  static int cek3 = 0;
+  static int cek4 = 0;
+  static int cek5 = 0;
+  static int cek6 = 0;
+  static int cek7 = 0;
+  static int cek8 = 0;
+  static int cek9 = 0;
+  static int cek10 = 0;
+  static int cek11 = 0;
+  static int cek12 = 0;
+  static int cek13 = 0;
+  static int cek14 = 0;
+  static int cek15 = 0;
+  static int cek16 = 0;
 }

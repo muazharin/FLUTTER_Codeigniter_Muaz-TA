@@ -87,6 +87,7 @@ class _KelasAntarState extends State<KelasAntar> {
                         itemCount: list.length,
                         itemBuilder: (context, i) {
                           final res = list[i];
+
                           void detail() {
                             showDialog(
                               context: context,
@@ -142,6 +143,7 @@ class _KelasAntarState extends State<KelasAntar> {
                                 child: InkWell(
                                   onTap: () {
                                     setState(() {
+                                      // _cekpertemuan();
                                       Util.mk = res.namamatakuliah;
                                     });
                                     NavigationRoutes.switchToScanAntar(context);
