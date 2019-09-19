@@ -155,13 +155,32 @@ class _ScanAntarState extends State<ScanAntar>
     return result;
   }
 
-  void insert(String _barcodeString) {
-    http.post(Baseurl.insertabsenpengantar, body: {
+  void insert(String _barcodeString) async {
+    final res = await http.post(Baseurl.insertabsenpengantar, body: {
       'barcode': _barcodeString,
       'mk': Util.mk,
       'kelas': Util.kelasantar
     });
-    _tampilmhs();
+    var datains = jsonDecode(res.body);
+    String mes = datains['pes'];
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Message"),
+          content: new Text(mes),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                _tampilmhs();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   scan() async {

@@ -69,20 +69,21 @@ class Api extends CI_Controller {
                 'persentase' => '0',
             ];
         }
-        $cek = $this->db->query('SELECT * FROM tb_asben WHERE nim = "'.$api['nim'].'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kelas.'"')->result();
-        echo $cek->num_row();
-        // if($this->db->insert('tb_absen', $api)){
-        //     echo "berhasil!";
-        // }
-        
-        
-        // echo json_encode($api).' | ';
-        // echo $api['nim'].' | ';
-        // echo $data.' | ';
-        // echo $str.' | ';
-        // echo $key.' | ';
-        // echo $len.' | ';
-        // echo $hasilbase;
+        $cek = $this->db->query('SELECT * FROM tb_absen WHERE nim = "'.$api['nim'].'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kelas.'"');
+        if($cek->num_rows()>0){
+            $d = [
+                'jml' => $cek->num_rows(),
+                'pes' => 'The student is already exist!'
+            ];
+            echo json_encode($d);
+        }else{
+            $this->db->insert('tb_absen', $api);
+            $d = [
+                'jml' => $cek->num_rows(),
+                'pes' => 'Data successfully added!'
+            ];
+            echo json_encode($d);
+        }
         
     }
 
