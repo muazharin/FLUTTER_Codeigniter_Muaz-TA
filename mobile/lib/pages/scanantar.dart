@@ -182,16 +182,38 @@ class _ScanAntarState extends State<ScanAntar>
                             Map<String, String> temu =
                                 pertemuan[index].cast<String, String>();
 
-                            void absendata(
-                                String ab, String nim, String nama) async {
-                              final r = await http.post(Baseurl.absenmi, body: {
-                                'nim': nim,
-                                'nama': nama,
-                                'ket': ab,
-                                'per': temu['pertemuan'],
+                            void absendata() async {
+                              final ros =
+                                  await http.post(Baseurl.absenmi, body: {
+                                'nim': Util.nim,
+                                'ket': Util.ab,
+                                'per': Util.pert,
                                 'mk': Util.mk,
                                 'kls': Util.kelasantar
                               });
+                              print(Util.ab);
+                              print(Util.nim);
+                              print(Util.pert);
+                              var dataup = json.decode(ros.body);
+                              String imes = dataup['pesan'];
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: new Text("Message"),
+                                    content: new Text(imes),
+                                    actions: <Widget>[
+                                      new FlatButton(
+                                        child: new Text("Close"),
+                                        onPressed: () {
+                                          _tampilmhs();
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             }
 
                             void update(String _barcodeString) async {
@@ -237,8 +259,12 @@ class _ScanAntarState extends State<ScanAntar>
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                               onPressed: () {
-                                                String ab = 'h';
-                                                absendata(ab, nim, nama);
+                                                setState(() {
+                                                  Util.nim = nim;
+                                                  Util.ab = 'h';
+                                                  Util.pert = temu['pertemuan'];
+                                                });
+                                                absendata();
                                                 Navigator.of(context).pop();
                                               },
                                             ),
@@ -247,8 +273,12 @@ class _ScanAntarState extends State<ScanAntar>
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                               onPressed: () {
-                                                String ab = 'a';
-                                                absendata(ab, nim, nama);
+                                                setState(() {
+                                                  Util.nim = nim;
+                                                  Util.ab = 'a';
+                                                  Util.pert = temu['pertemuan'];
+                                                });
+                                                absendata();
                                                 Navigator.of(context).pop();
                                               },
                                             ),
@@ -259,8 +289,12 @@ class _ScanAntarState extends State<ScanAntar>
                                                     color: Colors.white),
                                               ),
                                               onPressed: () {
-                                                String ab = 'i';
-                                                absendata(ab, nim, nama);
+                                                setState(() {
+                                                  Util.nim = nim;
+                                                  Util.ab = 'i';
+                                                  Util.pert = temu['pertemuan'];
+                                                });
+                                                absendata();
                                                 Navigator.of(context).pop();
                                               },
                                             ),
@@ -269,8 +303,12 @@ class _ScanAntarState extends State<ScanAntar>
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                               onPressed: () {
-                                                String ab = 's';
-                                                absendata(ab, nim, nama);
+                                                setState(() {
+                                                  Util.nim = nim;
+                                                  Util.ab = 's';
+                                                  Util.pert = temu['pertemuan'];
+                                                });
+                                                absendata();
                                                 Navigator.of(context).pop();
                                               },
                                             ),
@@ -512,7 +550,7 @@ class _ScanAntarState extends State<ScanAntar>
                                       ),
                                       IconButton(
                                         onPressed: null,
-                                        icon: p <= 13
+                                        icon: p < 13
                                             ? Icon(
                                                 Icons.info_outline,
                                                 color: Colors.red,

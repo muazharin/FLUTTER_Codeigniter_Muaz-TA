@@ -10,6 +10,9 @@ class Util {
   static String sidebar = '';
   static String mk = '';
   static String cek = '';
+  static String nim = '';
+  static String ab = '';
+  static String pert = '';
   static int cek1 = 0;
   static int cek2 = 0;
   static int cek3 = 0;

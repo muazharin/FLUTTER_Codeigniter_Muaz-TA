@@ -69,7 +69,6 @@ class Api extends CI_Controller {
 
     public function absenmi(){
         $nim = $this->input->post('nim',true);
-        $nama = $this->input->post('nama',true);
         $ket = $this->input->post('ab', true);
         $per = $this->input->post('per', true);
         $mk = $this->input->post('mk', true);
@@ -81,17 +80,52 @@ class Api extends CI_Controller {
             $api = [
                 'pesan' => 'The student is does not exist! Please add first'
             ];
-            echo json_encode($api);
+            // echo json_encode($api);
         }else{
-            $qwe = $this->db->query('UPDATE tb_absen SET per_'.$per.' = "'.$ab.'", tgl_'.$per.' = "'.$tanggal.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah="'.$mk.'" AND kelas = "'.$kls.'"');
-            $qwe2 = $this->db->query('UPDATE tb_persentase SET nim = "'.$nim.'", nama_mata_kuliah = "'.$mk.'", pertemuan = "'.$per.'", kehadiran = "'.$ket.'"');
-            $hitungqwe = $this->db->query('SELECT * FROM tb_persentase WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kehadiran = "'.$ket.'"')->num_rows();
-            $qwe3 = $this->db->query('UPDATE tb_absen SET persentase = "'.$hitungqwe.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
-            $api = [
-                'pesan' => 'The student successfully added!'
+            $api1 = [
+                'per_'.$per => $ket,
+                'tgl_'.$per => $tanggal,
             ];
-            echo json_encode($api);
+            $this->db->where('nim', $nim);
+            $this->db->where('nama_mata_kuliah', $mk);
+            $this->db->where('kelas', $kls);
+            $a = $this->db->update('tb_absen', $api1);
+            
+            $this->db->where('nim', $nim);
+            $this->db->where('nama_mata_kuliah', $mk);
+            $this->db->where('pertemuan', $per);
+            $qwe4 = $this->db->get('tb_persentase')->num_rows();
+            
+            if($qwe4 == 0){
+                $api2 = [
+                    'nim' => $nim,
+                    'nama_mata_kuliah' => $mk,
+                    'pertemuan' => $per,
+                    'kehadiran' => $ket
+                ];
+                $b = $this->db->insert('tb_persentase', $api2);
+            
+            }else{
+                $api2 = [
+                    'kehadiran' => $ket,
+                ];
+                $this->db->where('nim', $nim);
+                $this->db->where('nama_mata_kuliah', $mk);
+                $this->db->where('pertemuan', $per);
+                $b = $this->db->update('tb_persentase',$api2);
+            
+            }
+            $this->db->where('nim',$nim);
+            $this->db->where('nama_mata_kuliah',$mk);
+            $hitungqwe = $this->db->get('tb_persentase')->num_rows();
+            $qwe3 = $this->db->query('UPDATE tb_absen SET persentase = "'.$hitungqwe.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
+            if($a && $b && $qwe3){
+                $api = [
+                    'pesan' => 'The student successfully added!'
+                ];
+            }
         }
+        echo json_encode($api);
     }
 
     public function insertabsenpengantar(){
