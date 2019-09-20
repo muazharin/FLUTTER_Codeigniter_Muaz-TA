@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2019 at 08:10 AM
+-- Generation Time: Sep 20, 2019 at 03:14 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -75,7 +75,7 @@ CREATE TABLE `tb_absen` (
 --
 
 INSERT INTO `tb_absen` (`id_absen`, `nim`, `nama_mhs`, `nama_mata_kuliah`, `kelas`, `per_satu`, `tgl_satu`, `per_dua`, `tgl_dua`, `per_tiga`, `tgl_tiga`, `per_empat`, `tgl_empat`, `per_lima`, `tgl_lima`, `per_enam`, `tgl_enam`, `per_tujuh`, `tgl_tujuh`, `per_delapan`, `tgl_delapan`, `per_sembilan`, `tgl_sembilan`, `per_sepuluh`, `tgl_sepuluh`, `per_sebelas`, `tgl_sebelas`, `per_dua_belas`, `tgl_dua_belas`, `per_tiga_belas`, `tgl_tiga_belas`, `per_empat_belas`, `tgl_empat_belas`, `per_lima_belas`, `tgl_lima_belas`, `per_enam_belas`, `tgl_enam_belas`, `persentase`, `ket`) VALUES
-(1, 'E1E115074', 'Muazharin Alfan', 'Pemrograman Web', 'RPL', 'h', '2019-09-12 08:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '');
+(17, 'E1E115074', 'Muazharin Alfan', 'FISIKA', 'ganjil', 'h', '2019-09-19 22:30:26', 'h', '2019-09-19 22:31:50', 'h', '2019-09-20 00:08:00', 'h', '2019-09-20 00:10:33', 'h', '2019-09-20 00:10:43', 'h', '2019-09-20 00:10:50', 'h', '2019-09-20 00:10:57', 'h', '2019-09-20 00:11:04', 'h', '2019-09-20 00:11:14', 'h', '2019-09-20 00:11:24', 'h', '2019-09-20 00:11:35', 'h', '2019-09-20 00:11:45', 'h', '2019-09-20 00:11:59', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '13', '');
 
 -- --------------------------------------------------------
 
@@ -341,10 +341,31 @@ INSERT INTO `tb_mhs` (`id_mhs`, `nim`, `nama`, `tmpt_lahir`, `tgl_lahir`, `foto`
 
 CREATE TABLE `tb_persentase` (
   `id_persentase` int(11) NOT NULL,
+  `nim` varchar(9) NOT NULL,
   `nama_mata_kuliah` varchar(100) NOT NULL,
   `pertemuan` varchar(100) NOT NULL,
   `kehadiran` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_persentase`
+--
+
+INSERT INTO `tb_persentase` (`id_persentase`, `nim`, `nama_mata_kuliah`, `pertemuan`, `kehadiran`) VALUES
+(11, 'E1E115074', '', '', ''),
+(12, 'E1E115074', 'FISIKA', 'satu', 'h'),
+(13, 'E1E115074', 'FISIKA', 'dua', 'h'),
+(14, 'E1E115074', 'FISIKA', 'tiga', 'h'),
+(15, 'E1E115074', 'FISIKA', 'empat', 'h'),
+(16, 'E1E115074', 'FISIKA', 'lima', 'h'),
+(17, 'E1E115074', 'FISIKA', 'enam', 'h'),
+(18, 'E1E115074', 'FISIKA', 'tujuh', 'h'),
+(19, 'E1E115074', 'FISIKA', 'delapan', 'h'),
+(20, 'E1E115074', 'FISIKA', 'sembilan', 'h'),
+(21, 'E1E115074', 'FISIKA', 'sepuluh', 'h'),
+(22, 'E1E115074', 'FISIKA', 'sebelas', 'h'),
+(23, 'E1E115074', 'FISIKA', 'dua_belas', 'h'),
+(24, 'E1E115074', 'FISIKA', 'tiga_belas', 'h');
 
 --
 -- Indexes for dumped tables
@@ -400,7 +421,7 @@ ALTER TABLE `tb_persentase`
 -- AUTO_INCREMENT for table `tb_absen`
 --
 ALTER TABLE `tb_absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_admin`
@@ -436,7 +457,7 @@ ALTER TABLE `tb_mhs`
 -- AUTO_INCREMENT for table `tb_persentase`
 --
 ALTER TABLE `tb_persentase`
-  MODIFY `id_persentase` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_persentase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
