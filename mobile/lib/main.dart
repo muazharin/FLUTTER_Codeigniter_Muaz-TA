@@ -12,6 +12,7 @@ import 'package:mobile/model/baseurl.dart';
 import 'package:mobile/model/util.dart';
 import 'package:mobile/pages/scanantar.dart';
 import 'package:mobile/pages/scanminat.dart';
+import 'package:mobile/pages/about.dart';
 
 void main() => runApp(MyApp1());
 
@@ -31,6 +32,7 @@ class _MyApp1State extends State<MyApp1> {
           '/antar': (BuildContext context) => new KelasAntar(),
           '/scanantar': (BuildContext context) => new ScanAntar(),
           '/scanminat': (BuildContext context) => new ScanMinat(),
+          '/about': (BuildContext context) => new About(),
         });
   }
 }

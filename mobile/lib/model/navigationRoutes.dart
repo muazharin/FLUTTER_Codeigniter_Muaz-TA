@@ -16,4 +16,8 @@ class NavigationRoutes {
   static void switchToScanMinat(BuildContext context) {
     Navigator.pushNamed(context, '/scanminat');
   }
+
+  static void switchToAbout(BuildContext context) {
+    Navigator.pushNamed(context, '/about');
+  }
 }
