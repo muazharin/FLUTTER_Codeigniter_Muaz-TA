@@ -84,6 +84,24 @@ class _ScanAntarState extends State<ScanAntar>
     final responsecek = await http.post(Baseurl.cekpertemuan,
         body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasantar});
     var datacek = jsonDecode(responsecek.body);
+    setState(() {
+      Util.cek1 = datacek['cek1'];
+      Util.cek2 = datacek['cek2'];
+      Util.cek3 = datacek['cek3'];
+      Util.cek4 = datacek['cek4'];
+      Util.cek5 = datacek['cek5'];
+      Util.cek6 = datacek['cek6'];
+      Util.cek7 = datacek['cek7'];
+      Util.cek8 = datacek['cek8'];
+      Util.cek9 = datacek['cek9'];
+      Util.cek10 = datacek['cek10'];
+      Util.cek11 = datacek['cek11'];
+      Util.cek12 = datacek['cek12'];
+      Util.cek13 = datacek['cek13'];
+      Util.cek14 = datacek['cek14'];
+      Util.cek15 = datacek['cek15'];
+      Util.cek16 = datacek['cek16'];
+    });
   }
 
   @override
@@ -188,6 +206,7 @@ class _ScanAntarState extends State<ScanAntar>
                                       new FlatButton(
                                         child: new Text("Close"),
                                         onPressed: () {
+                                          _cekpertemuan();
                                           _tampilmhs();
                                           Navigator.of(context).pop();
                                         },
@@ -232,75 +251,128 @@ class _ScanAntarState extends State<ScanAntar>
                                           Flexible(
                                             flex: 1,
                                             child: Text(nama),
-                                          )
+                                          ),
+                                          new Container(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Row(
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: new RaisedButton(
+                                                        color: Colors.blue,
+                                                        child: new Text("Hadir",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white)),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            Util.nim = nim;
+                                                            Util.ab = 'h';
+                                                            Util.pert =
+                                                                temu['per'];
+                                                          });
+                                                          absendata();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: new RaisedButton(
+                                                        color: Colors.blue,
+                                                        child: new Text("Alpa",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white)),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            Util.nim = nim;
+                                                            Util.ab = 'a';
+                                                            Util.pert =
+                                                                temu['per'];
+                                                          });
+                                                          absendata();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: new RaisedButton(
+                                                        color: Colors.blue,
+                                                        child: new Text(
+                                                          "Izin",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white),
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            Util.nim = nim;
+                                                            Util.ab = 'i';
+                                                            Util.pert =
+                                                                temu['per'];
+                                                          });
+                                                          absendata();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: new RaisedButton(
+                                                        color: Colors.blue,
+                                                        child: new Text("Sakit",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white)),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            Util.nim = nim;
+                                                            Util.ab = 's';
+                                                            Util.pert =
+                                                                temu['per'];
+                                                          });
+                                                          absendata();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
                                     actions: <Widget>[
-                                      new Container(
-                                        child: Row(
-                                          children: <Widget>[
-                                            new RaisedButton(
-                                              child: new Text("H",
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                              onPressed: () {
-                                                setState(() {
-                                                  Util.nim = nim;
-                                                  Util.ab = 'h';
-                                                  Util.pert = temu['per'];
-                                                });
-                                                absendata();
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            new RaisedButton(
-                                              child: new Text("A",
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                              onPressed: () {
-                                                setState(() {
-                                                  Util.nim = nim;
-                                                  Util.ab = 'a';
-                                                  Util.pert = temu['per'];
-                                                });
-                                                absendata();
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            new RaisedButton(
-                                              child: new Text(
-                                                "I",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  Util.nim = nim;
-                                                  Util.ab = 'i';
-                                                  Util.pert = temu['per'];
-                                                });
-                                                absendata();
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            new RaisedButton(
-                                              child: new Text("S",
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                              onPressed: () {
-                                                setState(() {
-                                                  Util.nim = nim;
-                                                  Util.ab = 's';
-                                                  Util.pert = temu['per'];
-                                                });
-                                                absendata();
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
+                                      RaisedButton(
+                                        child: new Text(
+                                          "Close",
+                                          style: TextStyle(color: Colors.white),
                                         ),
-                                      ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      )
                                     ],
                                   );
                                 },
@@ -352,7 +424,12 @@ class _ScanAntarState extends State<ScanAntar>
                             st[14] = Util.cek14;
                             st[15] = Util.cek15;
                             st[16] = Util.cek16;
-
+                            int j = int.parse(temu['pertemuan']);
+                            print(j);
+                            print(st[j]);
+                            print(Util.cek1);
+                            // print(temu['pertemuan']);
+                            // int c = int.parse(st[j]);
                             return Center(
                               child: Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -371,9 +448,7 @@ class _ScanAntarState extends State<ScanAntar>
                                                   temu['pertemuan'],
                                                   style: TextStyle(
                                                       fontSize: 36.0,
-                                                      color: st[int.parse(temu[
-                                                                  'pertemuan'])] ==
-                                                              0
+                                                      color: st[j] == 0
                                                           ? Colors.black
                                                           : Colors.green),
                                                 )),
