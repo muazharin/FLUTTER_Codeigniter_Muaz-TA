@@ -11,7 +11,7 @@ Class Kripto {
         }
     
         $j = 0;
-    
+        // KSA
         for ($i = 0; $i < 256; $i++) {
             $j = ($j + $s[$i] + ord($key[$i % strlen($key)])) % 256;
             $x = $s[$i];
@@ -22,7 +22,7 @@ Class Kripto {
         $i = 0;
         $j = 0;
         $res = '';     
-    
+        // PRGA
         for ($y = 0; $y < strlen($str); $y++) {
             $i = ($i + 1) % 256;
             $j = ($j + $s[$i]) % 256;

@@ -84,7 +84,7 @@ class Kuliah extends CI_Controller {
         $data['sidebar1'] = '#menu4-2';
         $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
         $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
-        $data['kelas'] = ['RPL','KCV','KBJ'];
+        $data['kelas'] = ['RPL','KCV','KBJ','UMUM'];
         $data['semester'] = ['5','6','7','8'];
         $data['peminatan'] = $this->M_kuliah->mkPeminatan();
         $this->form_validation->set_rules('kode_mk', 'Kode Mata Kuliah', 'required|xss_clean|trim');
@@ -115,7 +115,7 @@ class Kuliah extends CI_Controller {
         $data['sidebar1'] = '#menu4-2';
         $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
         $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
-        $data['kelas'] = ['RPL','KCV','KBJ'];
+        $data['kelas'] = ['RPL','KCV','KBJ','UMUM'];
         $data['semester'] = ['5','6','7','8'];
         $data['peminatan'] = $this->M_kuliah->mkPeminatan();
         $this->form_validation->set_rules('kode_mk1', 'Kode Mata Kuliah', 'required|xss_clean|trim');

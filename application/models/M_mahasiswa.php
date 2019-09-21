@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_Mahasiswa extends CI_Model {
 
     public function getAllMhs(){
+        $this->db->order_by("nim", "ASC");
         return $this->db->get('tb_mhs')->result_array();
     }
     

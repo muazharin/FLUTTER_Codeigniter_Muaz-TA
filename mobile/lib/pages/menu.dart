@@ -158,7 +158,7 @@ class _MainMenuState extends State<MainMenu> {
                                       child: Column(
                                         children: <Widget>[
                                           Image.asset(
-                                            "img/logo.png",
+                                            "img/" + minat['foto'],
                                             width: 50.0,
                                           ),
                                           Center(

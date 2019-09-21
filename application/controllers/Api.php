@@ -46,6 +46,24 @@ class Api extends CI_Controller {
         }
         echo json_encode($api);
     }
+    public function mata_kuliah_peminatan(){
+        $semester = $this->input->post("semester", true);
+        $kelas = $this->input->post("kelas", true);
+        $qwe = $this->db->query('SELECT * FROM tb_mata_kuliah_peminatan WHERE semester = "'.$semester.'" AND kelas = "'.$kelas.'"')->result();
+        $api = array();
+        foreach($qwe as $q){
+            $api[] = [
+                'kodematakuliah' => $q->kode_mata_kuliah,
+                'namamatakuliah' => $q->nama_mata_kuliah,
+                'dosensatu' => $q->dosen_satu,
+                'hari' => $q->hari,
+                'mulai' => $q->mulai,
+                'selesai' => $q->selesai,
+                'ruang' => $q->ruang,
+            ];
+        }
+        echo json_encode($api);
+    }
 
     public function updateabsenpengantar(){
         $this->load->library('kripto');
@@ -143,6 +161,7 @@ class Api extends CI_Controller {
             }
             $this->db->where('nim',$nim);
             $this->db->where('nama_mata_kuliah',$mk);
+            $this->db->where('kehadiran','h');
             $hitungqwe = $this->db->get('tb_persentase')->num_rows();
             // $qwe3 = $this->db->query('UPDATE tb_absen SET persentase = "'.$hitungqwe.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
             // $qwe3 = $this->db->query("UPDATE tb_absen SET persentase =  '".$hitungqwe."' WHERE nim = '".$nim."' AND nama_mata_kuliah = '".$mk."' AND kelas = '".$kls."'");
@@ -198,7 +217,12 @@ class Api extends CI_Controller {
             echo json_encode($d);
         }else{
             $this->db->insert('tb_absen', $api);
-            $this->db->insert('tb_persentase', $api2);
+            $this->db->where('nim', $api['nim']);
+            $this->db->where('nama_mata_kuliah', '');
+            $cek2 = $this->db->get('tb_persentase')->num_rows();
+            if($cek2 <= 0){
+                $this->db->insert('tb_persentase', $api2);
+            }
             $d = [
                 'jml' => $cek->num_rows(),
                 'pes' => 'Data successfully added!'
@@ -228,25 +252,6 @@ class Api extends CI_Controller {
     public function cekpertemuan(){
         $namamatakuliah = $this->input->post("nama_mata_kuliah", true);
         $kelas = $this->input->post("kelas", true);
-
-        // $this->db->where("tb_absen.nama_mata_kuliah",$namamatakuliah );
-        // $this->db->where("tb_absen.kelas",$kelas );
-        // $apis = $this->db->get("tb_absen")->result();
-
-        // $rows = ["per_satu", "per_dua", "per_tiga","per_empat","per_lima", "per_enam", "per_tujuh", "per_delapan", "per_sembilan", "per_sepuluh", "per_sebelas","per_dua_belas","per_tiga_belas", "per_empat_belas","per_lima_belas","per_enam_belas"];
-
-        // $__result_all = array();
-        // foreach( $apis as $ind => $value )
-        // {
-        //     $result = array();
-        //     foreach( $rows as $row )
-        //     {
-        //         // if( $value->{ $row } == "h" )
-        //             $result[ $row ] = $value->{ $row };
-        //     }
-        //     array_push( $__result_all, $result );
-        // }
-        // echo json_encode( $__result_all );  
         $cek1 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_satu = "h"');
         $cek2 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_dua = "h"');
         $cek3 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_tiga = "h"');

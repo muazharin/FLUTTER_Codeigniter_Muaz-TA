@@ -9,30 +9,13 @@ import 'package:simple_permissions/simple_permissions.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 
-class ScanAntar extends StatefulWidget {
+class ScanMinat extends StatefulWidget {
   @override
-  _ScanAntarState createState() => _ScanAntarState();
+  _ScanMinatState createState() => _ScanMinatState();
 }
 
-class _ScanAntarState extends State<ScanAntar>
+class _ScanMinatState extends State<ScanMinat>
     with SingleTickerProviderStateMixin {
-  // int cek1 = Util.cek1;
-  // int cek2 = Util.cek2;
-  // int cek3 = Util.cek3;
-  // int cek4 = Util.cek4;
-  // int cek5 = Util.cek5;
-  // int cek6 = Util.cek6;
-  // int cek7 = Util.cek7;
-  // int cek8 = Util.cek8;
-  // int cek9 = Util.cek9;
-  // int cek10 = Util.cek10;
-  // int cek11 = Util.cek11;
-  // int cek12 = Util.cek12;
-  // int cek13 = Util.cek13;
-  // int cek14 = Util.cek14;
-  // int cek15 = Util.cek15;
-  // int cek16 = Util.cek16;
-
   String pertemuanJson =
       '{"menuAbsen":[{"pertemuan":"1","per":"satu"},{"pertemuan":"2","per":"dua"},{"pertemuan":"3","per":"tiga"},{"pertemuan":"4","per":"empat"},{"pertemuan":"5","per":"lima"},{"pertemuan":"6","per":"enam"},{"pertemuan":"7","per":"tujuh"},{"pertemuan":"8","per":"delapan"},{"pertemuan":"9","per":"sembilan"},{"pertemuan":"10","per":"sepuluh"},{"pertemuan":"11","per":"sebelas"},{"pertemuan":"12","per":"dua_belas"},{"pertemuan":"13","per":"tiga_belas"},{"pertemuan":"14","per":"empat_belas"},{"pertemuan":"15","per":"lima_belas"},{"pertemuan":"16","per":"enam_belas"}]}';
   final ScrollController _scrollController = ScrollController();
@@ -60,7 +43,7 @@ class _ScanAntarState extends State<ScanAntar>
       notfound = false;
     });
     final response = await http.post(Baseurl.mhspengantar,
-        body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasantar});
+        body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasminat});
     if (response.contentLength == 2) {
       setState(() {
         loading = false;
@@ -82,7 +65,7 @@ class _ScanAntarState extends State<ScanAntar>
 
   _cekpertemuan() async {
     final responsecek = await http.post(Baseurl.cekpertemuan,
-        body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasantar});
+        body: {"nama_mata_kuliah": Util.mk, "kelas": Util.kelasminat});
     var datacek = jsonDecode(responsecek.body);
     setState(() {
       Util.cek1 = datacek['cek1'];
@@ -187,7 +170,7 @@ class _ScanAntarState extends State<ScanAntar>
                                 'ab': Util.ab,
                                 'per': Util.pert,
                                 'mk': Util.mk,
-                                'kls': Util.kelasantar
+                                'kls': Util.kelasminat
                               });
                               print(Util.ab);
                               print(Util.nim);
@@ -523,7 +506,7 @@ class _ScanAntarState extends State<ScanAntar>
     final res = await http.post(Baseurl.insertabsenpengantar, body: {
       'barcode': _barcodeString,
       'mk': Util.mk,
-      'kelas': Util.kelasantar
+      'kelas': Util.kelasminat
     });
     var datains = jsonDecode(res.body);
     String mes = datains['pes'];

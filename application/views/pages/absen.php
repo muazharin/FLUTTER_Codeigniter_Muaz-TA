@@ -128,7 +128,7 @@
                                     <?php foreach($absen as $ab): $i++?>
                                     <tr>
                                         <td><?= $i;?></td>
-                                        <td> <a href="<?= base_url();?>mahasiswa/cariMahasiswa/<?= $ab['nim'];?>"><?= $ab['nim'];?></a> </td>
+                                        <td> <a target="_blank" href="<?= base_url();?>mahasiswa/cariMahasiswa/<?= $ab['nim'];?>"><?= $ab['nim'];?></a> </td>
                                         <td><?= $ab['nama_mhs'];?></td>
                                         <td><?= $ab['per_satu'];?></td>
                                         <td><?= $ab['per_dua'];?></td>
