@@ -56,7 +56,7 @@ class Api extends CI_Controller {
         $str = substr($hasilbase,'5',$len);
         $data = $this->kripto->rc4($key, $str);
         $qwe = $this->db->query('SELECT * FROM tb_mhs WHERE kode_unik = "'.$data.'"')->result();
-        $api = array();
+        // $api = array();
         foreach($qwe as $q){
             $api=[
                 'nim' => $q->nim,
@@ -67,6 +67,23 @@ class Api extends CI_Controller {
         echo json_encode($api);
     }
 
+    // public function tes($nim, $ket, $per, $mk, $kls){
+    //     $tanggal = date("Y-m-d H:i:s");
+    //     $ss = 'per_'.$per;
+    //     $ss2 = 'tgl_'.$per;
+    //     $api1 = [
+    //         $ss => $ket,
+    //         $ss2 => $tanggal,
+    //     ];
+    //     $this->db->where('nim', $nim);
+    //     $this->db->where('nama_mata_kuliah', $mk);
+    //     $this->db->where('kelas', $kls);
+    //     $a = $this->db->update('tb_absen', $api1);
+    //     // $a = $this->db->query('UPDATE tb_absen SET per_'.$per.' = "'.$ket.'", tgl_'.$per.' = "'.$tanggal.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
+        
+        
+    // }
+
     public function absenmi(){
         $nim = $this->input->post('nim',true);
         $ket = $this->input->post('ab', true);
@@ -74,27 +91,36 @@ class Api extends CI_Controller {
         $mk = $this->input->post('mk', true);
         $kls = $this->input->post('kls', true);
         $tanggal = date("Y-m-d H:i:s");
-        $api =[];
-        $cek = $this->db->query('SELECT * FROM tb_absen WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
+        $api = [];
+        
+        $this->db->where("nim",$nim);
+        $this->db->where("nama_mata_kuliah",$mk);
+        $this->db->where("kelas",$kls);
+        $cek = $this->db->get("tb_absen");
         if($cek->num_rows()<=0){
             $api = [
                 'pesan' => 'The student is does not exist! Please add first'
             ];
-            // echo json_encode($api);
+            echo json_encode($api);
         }else{
-            $api1 = [
-                'per_'.$per => $ket,
-                'tgl_'.$per => $tanggal,
+            // $this->tes($nim, $ket, $per, $mk, $kls);
+            // $e = "per_".$per;
+            // $r = "tgl_".$per;
+            $data = [
+                "per_".$per => $ket,
+                "tgl_".$per => $tanggal,
             ];
-            $this->db->where('nim', $nim);
-            $this->db->where('nama_mata_kuliah', $mk);
-            $this->db->where('kelas', $kls);
-            $a = $this->db->update('tb_absen', $api1);
-            
-            $this->db->where('nim', $nim);
-            $this->db->where('nama_mata_kuliah', $mk);
-            $this->db->where('pertemuan', $per);
-            $qwe4 = $this->db->get('tb_persentase')->num_rows();
+            $this->db->where("nim", $nim);
+            $this->db->where("nama_mata_kuliah", $mk);
+            $this->db->where("kelas", $kls);
+            $a = $this->db->update("tb_absen", $data);
+            // $a = "UPDATE tb_absen SET ".$e." = 'h', ".$r." = '2019-09-21 11:02:45' WHERE nim = '".$nim."' AND nama_mata_kuliah = '".$mk."' AND kelas = '".$kls."'";
+            // $this->db->query("UPDATE tb_absen SET ".$e." = 'h', ".$r." = '2019-09-21 11:02:45' WHERE nim = '".$nim."' AND nama_mata_kuliah = '".$mk."' AND kelas = '".$kls."'");
+
+            $this->db->where("nim", $nim);
+            $this->db->where("nama_mata_kuliah", $mk);
+            $this->db->where("pertemuan", $per);
+            $qwe4 = $this->db->get("tb_persentase")->num_rows();
             
             if($qwe4 == 0){
                 $api2 = [
@@ -104,28 +130,37 @@ class Api extends CI_Controller {
                     'kehadiran' => $ket
                 ];
                 $b = $this->db->insert('tb_persentase', $api2);
-            
             }else{
+                 
                 $api2 = [
                     'kehadiran' => $ket,
                 ];
-                $this->db->where('nim', $nim);
-                $this->db->where('nama_mata_kuliah', $mk);
-                $this->db->where('pertemuan', $per);
-                $b = $this->db->update('tb_persentase',$api2);
+                $this->db->where("nim", $nim);
+                $this->db->where("nama_mata_kuliah", $mk);
+                $this->db->where("pertemuan", $per);
+                $b = $this->db->update("tb_persentase",$api2);
             
             }
             $this->db->where('nim',$nim);
             $this->db->where('nama_mata_kuliah',$mk);
             $hitungqwe = $this->db->get('tb_persentase')->num_rows();
-            $qwe3 = $this->db->query('UPDATE tb_absen SET persentase = "'.$hitungqwe.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
-            if($a && $b && $qwe3){
-                $api = [
-                    'pesan' => 'The student successfully added!'
-                ];
-            }
+            // $qwe3 = $this->db->query('UPDATE tb_absen SET persentase = "'.$hitungqwe.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
+            // $qwe3 = $this->db->query("UPDATE tb_absen SET persentase =  '".$hitungqwe."' WHERE nim = '".$nim."' AND nama_mata_kuliah = '".$mk."' AND kelas = '".$kls."'");
+            $dw = [
+                'persentase' => $hitungqwe
+            ];
+            $this->db->where("nim", $nim);
+            $this->db->where("nama_mata_kuliah", $mk);
+            $this->db->where("kelas", $kls);
+            $this->db->update("tb_absen",$dw);
+        
+            $api = [
+                'pesan' => 'The student successfully added!'
+            ];
+            echo json_encode($api);
+            
+        
         }
-        echo json_encode($api);
     }
 
     public function insertabsenpengantar(){
@@ -193,6 +228,25 @@ class Api extends CI_Controller {
     public function cekpertemuan(){
         $namamatakuliah = $this->input->post("nama_mata_kuliah", true);
         $kelas = $this->input->post("kelas", true);
+
+        // $this->db->where("tb_absen.nama_mata_kuliah",$namamatakuliah );
+        // $this->db->where("tb_absen.kelas",$kelas );
+        // $apis = $this->db->get("tb_absen")->result();
+
+        // $rows = ["per_satu", "per_dua", "per_tiga","per_empat","per_lima", "per_enam", "per_tujuh", "per_delapan", "per_sembilan", "per_sepuluh", "per_sebelas","per_dua_belas","per_tiga_belas", "per_empat_belas","per_lima_belas","per_enam_belas"];
+
+        // $__result_all = array();
+        // foreach( $apis as $ind => $value )
+        // {
+        //     $result = array();
+        //     foreach( $rows as $row )
+        //     {
+        //         // if( $value->{ $row } == "h" )
+        //             $result[ $row ] = $value->{ $row };
+        //     }
+        //     array_push( $__result_all, $result );
+        // }
+        // echo json_encode( $__result_all );  
         $cek1 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_satu = "h"');
         $cek2 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_dua = "h"');
         $cek3 = $this->db->query('SELECT * FROM tb_absen WHERE nama_mata_kuliah = "'.$namamatakuliah.'" AND kelas="'.$kelas.'" AND per_tiga = "h"');
@@ -227,6 +281,6 @@ class Api extends CI_Controller {
             'cek15' => $cek15->num_rows(),
             'cek16' => $cek16->num_rows(),
         ];
-        echo json_encode($api);
+        echo json_encode($api);  
     }
 }
