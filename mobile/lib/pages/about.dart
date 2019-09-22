@@ -19,7 +19,7 @@ class _AboutState extends State<About> {
             children: <Widget>[
               SizedBox(height: 200.0),
               Image.asset(
-                'img/logo.png',
+                'img/cxv.png',
                 width: 100.0,
               ),
               SizedBox(height: 10.0),
