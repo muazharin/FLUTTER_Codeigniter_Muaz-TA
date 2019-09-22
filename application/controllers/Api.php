@@ -85,23 +85,6 @@ class Api extends CI_Controller {
         echo json_encode($api);
     }
 
-    // public function tes($nim, $ket, $per, $mk, $kls){
-    //     $tanggal = date("Y-m-d H:i:s");
-    //     $ss = 'per_'.$per;
-    //     $ss2 = 'tgl_'.$per;
-    //     $api1 = [
-    //         $ss => $ket,
-    //         $ss2 => $tanggal,
-    //     ];
-    //     $this->db->where('nim', $nim);
-    //     $this->db->where('nama_mata_kuliah', $mk);
-    //     $this->db->where('kelas', $kls);
-    //     $a = $this->db->update('tb_absen', $api1);
-    //     // $a = $this->db->query('UPDATE tb_absen SET per_'.$per.' = "'.$ket.'", tgl_'.$per.' = "'.$tanggal.'" WHERE nim = "'.$nim.'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kls.'"');
-        
-        
-    // }
-
     public function absenmi(){
         $nim = $this->input->post('nim',true);
         $ket = $this->input->post('ab', true);

@@ -81,4 +81,11 @@ class Mahasiswa extends CI_Controller {
 		$this->session->set_flashdata('mahasiswa', 'Dihapus');
 		redirect('mahasiswa');
 	}
+
+	public function download(){		
+		$this->load->helper('download');
+		// $data['file'] = file_get_contents(base_url().'assets/images/qr_mhs/'.$nim);
+		$nim = $this->uri->segment(3);
+		force_download('assets/images/qr_mhs/'.$nim, NULL);
+	}
 }

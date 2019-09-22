@@ -62,6 +62,7 @@
                                         <td> <a href="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto'];?>" target="_blank"> <img src="<?= base_url();?>assets/images/mahasiswa/<?= $mhs['foto']; ?>" height="100px"></a></td>
                                         <td><img src="<?= base_url();?>assets/images/qr_mhs/<?= $mhs['qr_code']; ?>" height="100px"></td>
                                         <td>
+                                            <a href="<?= base_url();?>mahasiswa/download/<?= $mhs['qr_code']?>" type="submit" class="btn btn-warning waves-effect"><i class="material-icons">get_app</i></a>
                                             <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myForm<?= $mhs['id_mhs'];?>"><i class="material-icons">mode_edit</i></button>
                                             <a href="<?= base_url();?>mahasiswa/hapus/<?= $mhs['id_mhs'];?>/<?= $mhs['foto']?>/<?= $mhs['qr_code']?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>
                                         </td>

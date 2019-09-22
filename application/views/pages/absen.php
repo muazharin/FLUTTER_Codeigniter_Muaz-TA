@@ -22,9 +22,9 @@
                     <?php endif;?>
                     <div class="body">
                         <div class="row clearfix">
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
                                       <div class="form-group">
                                             <div class="form-line">
                                                 <select class="form-control show-tick" name="matkul">
@@ -36,7 +36,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
                                       <div class="form-group">
                                             <div class="form-line">
                                                 <select class="form-control show-tick" name="kelas">
@@ -48,10 +48,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">SUBMIT</button>
                                     </div>
                                 </form>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <!-- <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">CETAK</button> -->
+                                    <a href="<?= base_url();?>absen/export/<?= $judul_matkul;?>/<?= $judul_kelas;?>" type="submit" class="btn btn-success btn-lg m-l-15 waves-effect">CETAK</a>
+                                </div>
                             </div>
                             <!-- <div class="col-md-4 ">
                                 <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">

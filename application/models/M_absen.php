@@ -22,4 +22,12 @@ class M_Absen extends CI_Model {
         $query = $this->db->query("SELECT * FROM tb_list_mk ");
         return $query->result_array();
     }
+
+    public function getDataAbsen(){
+        $mk =  $this->uri->segment(3);
+        $kls =  $this->uri->segment(4);
+        $this->db->where('nama_mata_kuliah',$mk);
+        $this->db->where('kelas',$kls);
+        return $this->db->get('tb_absen')->result_array();
+    }
 }

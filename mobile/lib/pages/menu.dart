@@ -3,7 +3,7 @@ import 'package:mobile/model/constant.dart';
 import 'dart:convert';
 import 'package:mobile/model/navigationRoutes.dart';
 import 'package:mobile/model/util.dart';
-import 'package:mobile/model/navigationRoutes.dart';
+
 
 String peminatanJson =
     '{"menuPeminatan":[{"item":"RPL","foto":"rpl.png"},{"item":"KCV","foto":"kcv.png"},{"item":"KBJ","foto":"kbj.png"},{"item":"UMUM","foto":"umum.png"}]}';
