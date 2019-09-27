@@ -116,18 +116,10 @@
                     </a>
                 </li>
                 <li id="menu4">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                    <a href="<?= base_url();?>pengantar">
                         <i class="material-icons">view_list</i>
                         <span>Mata Kuliah</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li id="menu4-1">
-                            <a href="<?= base_url();?>pengantar"> MK Pengantar</a>
-                        </li>
-                        <li id="menu4-2">
-                            <a href="<?= base_url();?>peminatan">MK Peminatan</a>
-                        </li>
-                    </ul>
                 </li>
                 <li id="menu2">
                     <a href="<?= base_url();?>mahasiswa">

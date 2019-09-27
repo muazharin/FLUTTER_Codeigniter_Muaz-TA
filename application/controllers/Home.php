@@ -14,7 +14,6 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data['sidebar'] = '#menu1';
-		$data['sidebar1'] = '';
 		$data['jml_dosen'] = $this->db->count_all_results('tb_dosen');
 		$data['jml_mhs'] = $this->db->count_all_results('tb_mhs');
 		$data['jml_list'] = $this->db->count_all_results('tb_list_mk');

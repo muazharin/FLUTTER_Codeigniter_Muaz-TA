@@ -13,11 +13,10 @@ class Kuliah extends CI_Controller {
     public function pengantar(){
 
         $data['sidebar'] = '#menu4';
-        $data['sidebar1'] = '#menu4-1';
         $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
         $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
         $data['kelas'] = ['ganjil','genap','ganjil/genap'];
-        $data['semester'] = ['1','2','3','4'];
+        $data['semester'] = ['1','2','3','4','5','6','7','8'];
         $data['pengantar'] = $this->M_kuliah->mkPengantar();
         $this->form_validation->set_rules('kode_mk', 'Kode Mata Kuliah', 'required|xss_clean|trim');
         $this->form_validation->set_rules('nama_mk', 'Nama Mata Kuliah', 'required|xss_clean|trim');
@@ -44,11 +43,10 @@ class Kuliah extends CI_Controller {
     public function edit_pengantar(){
 
         $data['sidebar'] = '#menu4';
-        $data['sidebar1'] = '#menu4-1';
         $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
         $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
         $data['kelas'] = ['ganjil','genap','ganjil/genap'];
-        $data['semester'] = ['1','2','3','4'];
+        $data['semester'] = ['1','2','3','4','5','6','7','8'];
         $data['pengantar'] = $this->M_kuliah->mkPengantar();
         $this->form_validation->set_rules('kode_mk1', 'Kode Mata Kuliah', 'required|xss_clean|trim');
         $this->form_validation->set_rules('nama_mk1', 'Nama Mata Kuliah', 'required|xss_clean|trim');
@@ -76,73 +74,5 @@ class Kuliah extends CI_Controller {
         $this->M_kuliah->hapusMkPengantar();
         $this->session->set_flashdata('mk_pengantar', 'Dihapus');
         redirect('pengantar');
-    }
-    
-    public function peminatan(){
-
-        $data['sidebar'] = '#menu4';
-        $data['sidebar1'] = '#menu4-2';
-        $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
-        $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
-        $data['kelas'] = ['RPL','KCV','KBJ','UMUM'];
-        $data['semester'] = ['5','6','7','8'];
-        $data['peminatan'] = $this->M_kuliah->mkPeminatan();
-        $this->form_validation->set_rules('kode_mk', 'Kode Mata Kuliah', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('nama_mk', 'Nama Mata Kuliah', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('dosen_satu', 'Dosen 1', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('dosen_dua', 'Dosen 2', 'xss_clean|trim');
-        $this->form_validation->set_rules('hari', 'Hari', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('mulai', 'Jadwal Mulai', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('selesai', 'Jadwal Selesai', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('ruang', 'Ruang', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('semester', 'Semester', 'required|xss_clean|trim');
-        if($this->form_validation->run()==FALSE){
-            $this->load->view('template/header');
-            $this->load->view('pages/kuliah_peminatan',$data);
-            $this->load->view('template/footer',$data);
-        }else{
-            $this->M_kuliah->tambahMkPeminatan();
-            $this->session->set_flashdata('mk_peminatan', 'Ditambahkan');
-            redirect('peminatan');
-        }
-
-    }
-    
-    public function edit_peminatan(){
-
-        $data['sidebar'] = '#menu4';
-        $data['sidebar1'] = '#menu4-2';
-        $data['hari'] = ['Senin','Selasa','Rabu','Kamis','Jumat'];
-        $data['ruang'] = ['IT-1','IT-2','IT-3','LAB. MULTIMEDIA','LAB. SI & PROGRAMMING','LAB. RPL'];
-        $data['kelas'] = ['RPL','KCV','KBJ','UMUM'];
-        $data['semester'] = ['5','6','7','8'];
-        $data['peminatan'] = $this->M_kuliah->mkPeminatan();
-        $this->form_validation->set_rules('kode_mk1', 'Kode Mata Kuliah', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('nama_mk1', 'Nama Mata Kuliah', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('dosen_satu1', 'Dosen 1', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('dosen_dua1', 'Dosen 2', 'xss_clean|trim');
-        $this->form_validation->set_rules('hari1', 'Hari', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('mulai1', 'Jadwal Mulai', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('selesai1', 'Jadwal Selesai', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('ruang1', 'Ruang', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('kelas1', 'Kelas', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('semester1', 'Semester', 'required|xss_clean|trim');
-        if($this->form_validation->run()==FALSE){
-            $this->load->view('template/header');
-            $this->load->view('pages/kuliah_peminatan',$data);
-            $this->load->view('template/footer',$data);
-        }else{
-            $this->M_kuliah->editMkPeminatan();
-            $this->session->set_flashdata('mk_peminatan', 'Ditambahkan');
-            redirect('peminatan');
-        }
-
-    } 
-
-    public function hapus_peminatan(){
-        $this->M_kuliah->hapusMkPeminatan();
-        $this->session->set_flashdata('mk_peminatan', 'Dihapus');
-        redirect('peminatan');
     }
 }

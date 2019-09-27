@@ -42,7 +42,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('<?= $sidebar; ?>').addClass("active");
-            $('<?= $sidebar1; ?>').addClass("active");
         });
     </script>
 

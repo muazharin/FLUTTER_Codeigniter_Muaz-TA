@@ -4,11 +4,10 @@ import 'dart:convert';
 import 'package:mobile/model/navigationRoutes.dart';
 import 'package:mobile/model/util.dart';
 
-
 String peminatanJson =
     '{"menuPeminatan":[{"item":"RPL","foto":"rpl.png"},{"item":"KCV","foto":"kcv.png"},{"item":"KBJ","foto":"kbj.png"},{"item":"UMUM","foto":"umum.png"}]}';
 String pengantarJson =
-    '{"menuPengantar":[{"semester":"1","foto":"sms1.png"},{"semester":"2","foto":"sms2.png"},{"semester":"3","foto":"sms3.png"},{"semester":"4","foto":"sms4.png"}]}';
+    '{"menuPengantar": [{"semester": "1","foto": "sms1.png"}, {"semester": "2","foto": "sms2.png"}, {"semester": "3","foto": "sms3.png"}, {"semester": "4","foto": "sms4.png"}, {"semester": "5","foto": "sms5.png"}, {"semester": "6","foto": "sms6.png"}, {"semester": "7","foto": "sms7.png"}, {"semester": "8","foto": "sms8.png"}]}';
 
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
@@ -78,8 +77,8 @@ class _MainMenuState extends State<MainMenu> {
         // drawer: Drawer(),
         appBar: AppBar(
           backgroundColor: Colors.amber,
-          leading: Icon(Icons.home),
-          title: Center(child: Text('Home')),
+          // leading: Icon(Icons.home),
+          title: Text('Home'),
           actions: <Widget>[
             PopupMenuButton<String>(
               onSelected: pilihAksi,
@@ -102,91 +101,6 @@ class _MainMenuState extends State<MainMenu> {
             child: CustomScrollView(
               controller: _scrollController,
               slivers: <Widget>[
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
-                    child: SizedBox(
-                      height: 120.0,
-                      width: double.infinity,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: peminatan.length,
-                        itemBuilder: (context, index) {
-                          Map<String, String> minat =
-                              peminatan[index].cast<String, String>();
-                          void kelasm() {
-                            switch (minat['item']) {
-                              case "RPL":
-                                setState(() {
-                                  Util.kelasminat = "RPL";
-                                  Util.sidebar = "minat";
-                                });
-                                NavigationRoutes.switchToKelasMinat(context);
-                                break;
-                              case "KCV":
-                                setState(() {
-                                  Util.kelasminat = "KCV";
-                                  Util.sidebar = "minat";
-                                });
-                                NavigationRoutes.switchToKelasMinat(context);
-                                break;
-                              case "KBJ":
-                                setState(() {
-                                  Util.kelasminat = "KBJ";
-                                  Util.sidebar = "minat";
-                                });
-                                NavigationRoutes.switchToKelasMinat(context);
-                                break;
-                              case "UMUM":
-                                setState(() {
-                                  Util.kelasminat = "UMUM";
-                                  Util.sidebar = "minat";
-                                });
-                                NavigationRoutes.switchToKelasMinat(context);
-                                break;
-                              default:
-                            }
-                          }
-
-                          return Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Card(
-                              color: Colors.white,
-                              child: InkWell(
-                                onTap: kelasm,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      height: double.infinity,
-                                      color: Colors.amber,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Image.asset(
-                                            "img/" + minat['foto'],
-                                            width: 50.0,
-                                          ),
-                                          Center(
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  40.0, 10.0, 40.0, 0.0),
-                                              child: Text(minat['item'],
-                                                  style: TextStyle(
-                                                      color: Colors.black54,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -196,46 +110,20 @@ class _MainMenuState extends State<MainMenu> {
                     (BuildContext context, int index) {
                       Map<String, String> antar =
                           pengantar[index].cast<String, String>();
-                      void kelasp() {
-                        switch (int.parse(antar['semester'])) {
-                          case 1:
-                            setState(() {
-                              Util.semesterantar = 1;
-                              Util.sidebar = "antar";
-                            });
-                            NavigationRoutes.switchToKelasAntar(context);
-                            break;
-                          case 2:
-                            setState(() {
-                              Util.semesterantar = 2;
-                              Util.sidebar = "antar";
-                            });
-                            NavigationRoutes.switchToKelasAntar(context);
-                            break;
-                          case 3:
-                            setState(() {
-                              Util.semesterantar = 3;
-                              Util.sidebar = "antar";
-                            });
-                            NavigationRoutes.switchToKelasAntar(context);
-                            break;
-                          case 4:
-                            setState(() {
-                              Util.semesterantar = 4;
-                              Util.sidebar = "antar";
-                            });
-                            NavigationRoutes.switchToKelasAntar(context);
-                            break;
-                          default:
-                        }
-                      }
-
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           color: Colors.white,
                           child: InkWell(
-                            onTap: kelasp,
+                            // onTap: kelasp,
+                            onTap: () {
+                              setState(() {
+                                int _sm = int.parse(antar['semester']);
+                                Util.semesterantar = _sm;
+                                Util.sidebar = "antar";
+                              });
+                              NavigationRoutes.switchToKelasAntar(context);
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(children: <Widget>[
@@ -244,7 +132,7 @@ class _MainMenuState extends State<MainMenu> {
                                   child: Container(
                                     child: Column(children: <Widget>[
                                       Image.asset(
-                                        "img/logo.png",
+                                        "img/" + antar['foto'],
                                         width: 80.0,
                                       ),
                                     ]),

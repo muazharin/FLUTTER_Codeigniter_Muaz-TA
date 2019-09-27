@@ -591,7 +591,9 @@ class _ScanAntarState extends State<ScanAntar>
                         itemCount: listmhs.length,
                         itemBuilder: (context, i) {
                           final res = listmhs[i];
-                          int p = int.parse(res.persentase);
+                          double p = double.parse(res.persentase);
+                          double sen = (p / 16) * 100;
+
                           return Container(
                             child: Padding(
                               padding:
@@ -637,9 +639,9 @@ class _ScanAntarState extends State<ScanAntar>
                                                   title: new Text("Info"),
                                                   content: Row(
                                                     children: <Widget>[
-                                                      Text(
-                                                          "Jumlah Kehadiran = " +
-                                                              res.persentase)
+                                                      Text("Kehadiran = " +
+                                                          sen.toString() +
+                                                          ' %')
                                                     ],
                                                   ),
                                                   actions: <Widget>[

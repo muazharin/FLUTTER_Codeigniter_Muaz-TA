@@ -12,7 +12,6 @@ class Absen extends CI_Controller {
 
     public function index(){
         $data['sidebar'] = '#menu5';
-        $data['sidebar1'] = '';
         $data['judul_matkul'] = 'PEMROGRAMAN WEB';
         $data['judul_kelas'] = 'RPL';
         $data['matkul'] = $this->M_absen->getMatKul();

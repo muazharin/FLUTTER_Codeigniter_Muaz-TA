@@ -51,10 +51,14 @@ flutter:
     - img/logo.png
     - img/wa.jpg
     - img/we.png
-    - img/rpl.png
-    - img/kcv.png
-    - img/kbj.png
-    - img/umum.png
+    - img/sms1.png
+    - img/sms2.png
+    - img/sms3.png
+    - img/sms4.png
+    - img/sms5.png
+    - img/sms6.png
+    - img/sms7.png
+    - img/sms8.png
     - img/cxv.png
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
