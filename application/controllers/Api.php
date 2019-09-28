@@ -46,24 +46,6 @@ class Api extends CI_Controller {
         }
         echo json_encode($api);
     }
-    public function mata_kuliah_peminatan(){
-        $semester = $this->input->post("semester", true);
-        $kelas = $this->input->post("kelas", true);
-        $qwe = $this->db->query('SELECT * FROM tb_mata_kuliah_peminatan WHERE semester = "'.$semester.'" AND kelas = "'.$kelas.'"')->result();
-        $api = array();
-        foreach($qwe as $q){
-            $api[] = [
-                'kodematakuliah' => $q->kode_mata_kuliah,
-                'namamatakuliah' => $q->nama_mata_kuliah,
-                'dosensatu' => $q->dosen_satu,
-                'hari' => $q->hari,
-                'mulai' => $q->mulai,
-                'selesai' => $q->selesai,
-                'ruang' => $q->ruang,
-            ];
-        }
-        echo json_encode($api);
-    }
 
     public function updateabsenpengantar(){
         $this->load->library('kripto');

@@ -6,8 +6,8 @@ class M_Absen extends CI_Model {
     public function getAllDataAbsen(){
         // $query = $this->db->query("SELECT * FROM tb_absen WHERE nama_mata_kuliah = 'PEMROGRAMAN WEB' AND kelas = 'RPL'");
         // return $query->result_array();
-        $this->db->where('nama_mata_kuliah', 'PEMROGRAMAN WEB');
-        $this->db->where('kelas', 'RPL');
+        $this->db->where('nama_mata_kuliah', 'FISIKA');
+        $this->db->where('kelas', 'ganjil');
         return $this->db->get('tb_absen')->result_array();
     }
     

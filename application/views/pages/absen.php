@@ -57,25 +57,10 @@
                                     <a href="<?= base_url();?>absen/export/<?= $judul_matkul;?>/<?= $judul_kelas;?>" type="submit" class="btn btn-success btn-lg m-l-15 waves-effect">CETAK</a>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-4 ">
-                                <form id="form_advanced_validation" method="post" action="" enctype="multipart/form-data">
-                                    <div class="col-lg-6 col-md-3 col-sm-3 col-xs-6">
-                                        <div class="form-group form-float">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" name="keyword" placeholder="Cari Mahasiswa" required>
-                                            </div>
-                                            <div class="help-info"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <button type="button" class="btn btn-primary btn-lg m-l-15 waves-effect">CARI</button>
-                                    </div>
-                                </form>
-                            </div> -->
                         </div>
                         <!-- <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button> -->
                         <hr>
-                        <center><h5>MATA KULIAH <?= $judul_matkul;?> &nbsp; &nbsp;||&nbsp; &nbsp;KELAS <?= $judul_kelas;?></h5> </center> 
+                        <center><h5><?= $judul_matkul;?> &nbsp; &nbsp;||&nbsp; &nbsp;<?= $judul_kelas;?></h5> </center> 
                         <hr>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="overflow: auto;">

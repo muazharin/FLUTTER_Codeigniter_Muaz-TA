@@ -6,12 +6,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:mobile/pages/menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mobile/pages/kelas_minat.dart';
 import 'package:mobile/pages/kelas_antar.dart';
 import 'package:mobile/model/baseurl.dart';
 import 'package:mobile/model/util.dart';
 import 'package:mobile/pages/scanantar.dart';
-import 'package:mobile/pages/scanminat.dart';
 import 'package:mobile/pages/about.dart';
 
 void main() => runApp(MyApp1());
@@ -28,10 +26,8 @@ class _MyApp1State extends State<MyApp1> {
         home: new MyApp(),
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
-          '/minat': (BuildContext context) => new KelasMinat(),
           '/antar': (BuildContext context) => new KelasAntar(),
           '/scanantar': (BuildContext context) => new ScanAntar(),
-          '/scanminat': (BuildContext context) => new ScanMinat(),
           '/about': (BuildContext context) => new About(),
         });
   }

@@ -26,154 +26,69 @@ class _SidebarState extends State<Sidebar> {
 
   @override
   Widget build(BuildContext context) {
-    switch (Util.sidebar) {
-      case "minat":
-        return new Drawer(
-          child: new Container(
-            child: ListView(
-              children: <Widget>[
-                new UserAccountsDrawerHeader(
-                  accountName: Text(Util.username),
-                  accountEmail: Text('alfanmuazharin@gmail.com'),
-                  currentAccountPicture: Image.network(
-                      Baseurl.ip + '/muaz_ta/assets/images/' + Util.foto),
-                  decoration: BoxDecoration(
-                      image: new DecorationImage(
-                          image: NetworkImage(Baseurl.ip +
-                              '/muaz_ta/assets/images/user-img-background.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                new SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text("Semester 5"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.semesterminat = 5;
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasMinat(context);
-                        },
-                      ),
-                      ListTile(
-                        title: Text("Semester 6"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.semesterminat = 6;
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasMinat(context);
-                        },
-                      ),
-                      ListTile(
-                        title: Text("Semester 7"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.semesterminat = 7;
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasMinat(context);
-                        },
-                      ),
-                      ListTile(
-                        title: Text("Semester 8"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.semesterminat = 8;
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasMinat(context);
-                        },
-                      ),
-                    ],
-                  ),
-                )
-              ],
+    return Drawer(
+      child: new Container(
+        child: ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: Text(Util.username),
+              accountEmail: Text('alfanmuazharin@gmail.com'),
+              currentAccountPicture: Image.network(
+                  Baseurl.ip + '/muaz_ta/assets/images/' + Util.foto),
+              decoration: BoxDecoration(
+                  image: new DecorationImage(
+                      image: NetworkImage(Baseurl.ip +
+                          '/muaz_ta/assets/images/user-img-background.jpg'),
+                      fit: BoxFit.cover)),
             ),
-          ),
-        );
-        break;
-      case "antar":
-        return Drawer(
-          child: new Container(
-            child: ListView(
-              children: <Widget>[
-                new UserAccountsDrawerHeader(
-                  accountName: Text(Util.username),
-                  accountEmail: Text('alfanmuazharin@gmail.com'),
-                  currentAccountPicture: Image.network(
-                      Baseurl.ip + '/muaz_ta/assets/images/' + Util.foto),
-                  decoration: BoxDecoration(
-                      image: new DecorationImage(
-                          image: NetworkImage(Baseurl.ip +
-                              '/muaz_ta/assets/images/user-img-background.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                new SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text("Ganjil"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.kelasantar = "ganjil";
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasAntar(context);
-                        },
-                      ),
-                      ListTile(
-                        title: Text("Genap"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.kelasantar = "genap";
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasAntar(context);
-                        },
-                      ),
-                      ListTile(
-                        title: Text("Ganjil/Genap"),
-                        leading: Icon(Icons.blur_circular),
-                        trailing: Icon(Icons.arrow_right),
-                        onTap: () {
-                          setState(() {
-                            Util.kelasantar = "ganjil/genap";
-                          });
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          NavigationRoutes.switchToKelasAntar(context);
-                        },
-                      ),
-                    ],
+            new SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text("Ganjil"),
+                    leading: Icon(Icons.blur_circular),
+                    trailing: Icon(Icons.arrow_right),
+                    onTap: () {
+                      setState(() {
+                        Util.kelasantar = "ganjil";
+                      });
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      NavigationRoutes.switchToKelasAntar(context);
+                    },
                   ),
-                )
-              ],
-            ),
-          ),
-        );
-        break;
-      default:
-        return Drawer();
-    }
+                  ListTile(
+                    title: Text("Genap"),
+                    leading: Icon(Icons.blur_circular),
+                    trailing: Icon(Icons.arrow_right),
+                    onTap: () {
+                      setState(() {
+                        Util.kelasantar = "genap";
+                      });
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      NavigationRoutes.switchToKelasAntar(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Ganjil/Genap"),
+                    leading: Icon(Icons.blur_circular),
+                    trailing: Icon(Icons.arrow_right),
+                    onTap: () {
+                      setState(() {
+                        Util.kelasantar = "ganjil/genap";
+                      });
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      NavigationRoutes.switchToKelasAntar(context);
+                    },
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
