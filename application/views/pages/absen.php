@@ -4,7 +4,13 @@
             <h2>
                 ABSEN
                 <!-- <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small> -->
-            </h2>
+            </h2><br>
+            <?php if($this->session->flashdata('absen')):?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Data absen <strong>berhasil</strong> <?= $this->session->flashdata('absen');?>
+            </div>
+            <?php endif;?>
         </div>
         <!-- Basic Examples -->
         <div class="row clearfix">
@@ -53,12 +59,10 @@
                                     </div>
                                 </form>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <!-- <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">CETAK</button> -->
                                     <a href="<?= base_url();?>absen/export/<?= $judul_matkul;?>/<?= $judul_kelas;?>" type="submit" class="btn btn-success btn-lg m-l-15 waves-effect">CETAK</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button> -->
                         <hr>
                         <center><h5><?= $judul_matkul;?> &nbsp; &nbsp;||&nbsp; &nbsp;<?= $judul_kelas;?></h5> </center> 
                         <hr>
@@ -86,6 +90,7 @@
                                         <th>15</th>
                                         <th>16</th>
                                         <th>%</th>
+                                        <th>Opsi</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -110,6 +115,7 @@
                                         <th>15</th>
                                         <th>16</th>
                                         <th>%</th>
+                                        <th>Opsi</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -119,23 +125,27 @@
                                         <td><?= $i;?></td>
                                         <td> <a target="_blank" href="<?= base_url();?>mahasiswa/cariMahasiswa/<?= $ab['nim'];?>"><?= $ab['nim'];?></a> </td>
                                         <td><?= $ab['nama_mhs'];?></td>
-                                        <td><?= $ab['per_satu'];?></td>
-                                        <td><?= $ab['per_dua'];?></td>
-                                        <td><?= $ab['per_tiga'];?></td>
-                                        <td><?= $ab['per_empat'];?></td>
-                                        <td><?= $ab['per_lima'];?></td>
-                                        <td><?= $ab['per_enam'];?></td>
-                                        <td><?= $ab['per_tujuh'];?></td>
-                                        <td><?= $ab['per_delapan'];?></td>
-                                        <td><?= $ab['per_sembilan'];?></td>
-                                        <td><?= $ab['per_sepuluh'];?></td>
-                                        <td><?= $ab['per_sebelas'];?></td>
-                                        <td><?= $ab['per_dua_belas'];?></td>
-                                        <td><?= $ab['per_tiga_belas'];?></td>
-                                        <td><?= $ab['per_empat_belas'];?></td>
-                                        <td><?= $ab['per_lima_belas'];?></td>
-                                        <td><?= $ab['per_enam_belas'];?></td>
+                                        <td <?php if($ab['per_satu'] == 'a'){?> style="color: red;"<?php }else if($ab['per_satu']=='i'){?>style="color: green;"<?php }else if($ab['per_satu']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_satu'];?></b></td>
+                                        <td <?php if($ab['per_dua'] == 'a'){?> style="color: red;"<?php }else if($ab['per_dua']=='i'){?>style="color: green;"<?php }else if($ab['per_dua']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_dua'];?></b></td>
+                                        <td <?php if($ab['per_tiga'] == 'a'){?> style="color: red;"<?php }else if($ab['per_tiga']=='i'){?>style="color: green;"<?php }else if($ab['per_tiga']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_tiga'];?></b></td>
+                                        <td <?php if($ab['per_empat'] == 'a'){?> style="color: red;"<?php }else if($ab['per_empat']=='i'){?>style="color: green;"<?php }else if($ab['per_empat']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_empat'];?></b></td>
+                                        <td <?php if($ab['per_lima'] == 'a'){?> style="color: red;"<?php }else if($ab['per_lima']=='i'){?>style="color: green;"<?php }else if($ab['per_lima']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_lima'];?></b></td>
+                                        <td <?php if($ab['per_enam'] == 'a'){?> style="color: red;"<?php }else if($ab['per_enam']=='i'){?>style="color: green;"<?php }else if($ab['per_enam']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_enam'];?></b></td>
+                                        <td <?php if($ab['per_tujuh'] == 'a'){?> style="color: red;"<?php }else if($ab['per_tujuh']=='i'){?>style="color: green;"<?php }else if($ab['per_tujuh']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_tujuh'];?></b></td>
+                                        <td <?php if($ab['per_delapan'] == 'a'){?> style="color: red;"<?php }else if($ab['per_delapan']=='i'){?>style="color: green;"<?php }else if($ab['per_delapan']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_delapan'];?></b></td>
+                                        <td <?php if($ab['per_sembilan'] == 'a'){?> style="color: red;"<?php }else if($ab['per_sembilan']=='i'){?>style="color: green;"<?php }else if($ab['per_sembilan']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_sembilan'];?></b></td>
+                                        <td <?php if($ab['per_sepuluh'] == 'a'){?> style="color: red;"<?php }else if($ab['per_sepuluh']=='i'){?>style="color: green;"<?php }else if($ab['per_sepuluh']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_sepuluh'];?></b></td>
+                                        <td <?php if($ab['per_sebelas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_sebelas']=='i'){?>style="color: green;"<?php }else if($ab['per_sebelas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_sebelas'];?></b></td>
+                                        <td <?php if($ab['per_dua_belas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_dua_belas']=='i'){?>style="color: green;"<?php }else if($ab['per_dua_belas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_dua_belas'];?></b></td>
+                                        <td <?php if($ab['per_tiga_belas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_tiga_belas']=='i'){?>style="color: green;"<?php }else if($ab['per_tiga_belas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_tiga_belas'];?></b></td>
+                                        <td <?php if($ab['per_empat_belas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_empat_belas']=='i'){?>style="color: green;"<?php }else if($ab['per_empat_belas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_empat_belas'];?></b></td>
+                                        <td <?php if($ab['per_lima_belas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_lima_belas']=='i'){?>style="color: green;"<?php }else if($ab['per_lima_belas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_lima_belas'];?></b></td>
+                                        <td <?php if($ab['per_enam_belas'] == 'a'){?> style="color: red;"<?php }else if($ab['per_enam_belas']=='i'){?>style="color: green;"<?php }else if($ab['per_enam_belas']=='s'){?>style="color: blue;"<?php }?> > <b><?= $ab['per_enam_belas'];?></b></td>
                                         <td><?= ($ab['persentase']/16)*100;?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#myForm<?= $ab['id_absen'];?>"><i class="material-icons">mode_edit</i></button>
+                                            <a href="<?= base_url();?>absen/hapus_absen/<?= $ab['id_absen'];?>/<?= $ab['nim'];?>/<?= $ab['nama_mata_kuliah'];?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');" type="submit" class="btn btn-danger waves-effect"><i class="material-icons">delete</i></a>
+                                        </td>
                                     </tr>
                                     <?php endforeach;?>
                                 </tbody>
@@ -148,3 +158,60 @@
         <!-- #END# Basic Examples -->
     </div>
 </section>
+<?php foreach($absen as $ab): ?>
+<!-- Modal -->
+<div id="myForm<?= $ab['id_absen'];?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4> -->
+      </div>
+      <div class="modal-body">
+        <!-- Horizontal Layout -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Edit Data Absen
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <!-- Advanced Validation -->
+                        <form id="form_advanced_validation" method="post" action="absen/edit_absen">
+                            <div class="form-group form-float">
+                                <label class="form-label">Nama &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<?= $ab['nama_mhs'];?></label><br>
+                                <label class="form-label">Mata Kuliah :&nbsp;<?= $ab['nama_mata_kuliah'];?></label>
+                            </div>
+                            <div class="form-group form-float">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <p>Kelas</p>
+                                    <select class="form-control show-tick" name="kel">
+                                        <option></option>
+                                        <?php foreach($kelas as $k):?>
+                                            <?php if($k == $ab['kelas']){?>
+                                                <option value="<?= $k;?>" selected><?= $k;?></option>
+                                            <?php }else{?>
+                                                <option value="<?= $k;?>"><?= $k;?></option>
+                                            <?php }?>
+                                        <?php endforeach;?>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="id_absen" value="<?= $ab['id_absen'];?>" required>
+                            <button class="btn btn-primary waves-effect" type="submit">Perbarui</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Horizontal Layout -->
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach;?>

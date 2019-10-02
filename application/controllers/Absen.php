@@ -25,7 +25,19 @@ class Absen extends CI_Controller {
         $this->load->view('template/header');
         $this->load->view('pages/absen',$data);
         $this->load->view('template/footer',$data);
-    }
+	}
+	
+	public function edit_absen(){
+		$this->M_absen->edit();
+		$this->session->set_flashdata('absen', 'Diperbarui');
+		redirect('absen');
+	}
+
+	public function hapus_absen(){
+		$this->M_absen->hapus();
+		$this->session->set_flashdata('absen', 'Dihapus');
+		redirect('absen');
+	}
 
     public function export(){
         $data['export']=$this->M_absen->getDataAbsen();

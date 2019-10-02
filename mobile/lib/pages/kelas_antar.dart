@@ -76,14 +76,17 @@ class _KelasAntarState extends State<KelasAntar> {
         key: _refresh,
         child: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('img/we.png'), fit: BoxFit.cover)),
+            // decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //         image: AssetImage('img/we.png'), fit: BoxFit.cover)),
             child: loading
                 ? Center(child: CircularProgressIndicator())
                 : notfound
                     ? Center(child: Text("No Data Found!"))
-                    : ListView.builder(
+                    : ListView.separated(
+                        separatorBuilder: (context, index) => Divider(
+                              color: Colors.black12,
+                            ),
                         itemCount: list.length,
                         itemBuilder: (context, i) {
                           final res = list[i];
@@ -139,7 +142,8 @@ class _KelasAntarState extends State<KelasAntar> {
                               child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 0.0),
                             child: Column(children: <Widget>[
-                              Card(
+                              Padding(
+                                padding: const EdgeInsets.all(6.0),
                                 child: InkWell(
                                   onTap: () {
                                     setState(() {
@@ -177,6 +181,7 @@ class _KelasAntarState extends State<KelasAntar> {
                                             onPressed: detail,
                                             icon: Icon(
                                               Icons.assignment,
+                                              color: Colors.green[300],
                                               size: 30.0,
                                             ),
                                           )

@@ -30,4 +30,26 @@ class M_Absen extends CI_Model {
         $this->db->where('kelas',$kls);
         return $this->db->get('tb_absen')->result_array();
     }
+
+    public function edit(){
+        $id = $this->input->post('id_absen');
+        $data = [
+            'kelas' => $this->input->post('kel')
+        ];
+        $this->db->where('id_absen', $id);
+        return $this->db->update('tb_absen', $data);
+    }
+
+    public function hapus(){
+        $nim = $this->uri->segment(4);
+        $nmk = $this->uri->segment(5);
+        $this->db->where('nim', $nim);
+        $this->db->where('nama_mata_kuliah', $nmk);
+        $this->db->delete('tb_persentase');
+
+
+        $id = $this->uri->segment(3);
+        $this->db->where('id_absen', $id);
+        return $this->db->delete('tb_absen');
+    }
 }

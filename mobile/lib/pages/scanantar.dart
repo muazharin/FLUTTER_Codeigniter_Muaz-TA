@@ -586,7 +586,7 @@ class _ScanAntarState extends State<ScanAntar>
                     ? Center(child: Text("No Data Found!"))
                     : ListView.separated(
                         separatorBuilder: (context, index) => Divider(
-                              color: Colors.black,
+                              color: Colors.black12,
                             ),
                         itemCount: listmhs.length,
                         itemBuilder: (context, i) {

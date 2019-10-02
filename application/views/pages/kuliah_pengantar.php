@@ -28,7 +28,6 @@
                     <?php endif;?>
                     <div class="body">
                         <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#myForm"><i class="material-icons">add</i></button>
-                        <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button>
                         <hr>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable" style="overflow: true;">

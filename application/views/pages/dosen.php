@@ -27,7 +27,6 @@
                     
                     <div class="body">
                         <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#myFormD"><i class="material-icons">add</i></button>
-                        <button type="button" class="btn btn-primary waves-effect"><i class="material-icons">picture_as_pdf</i></button>
                         <hr>
                         <div class="row">
                                         
