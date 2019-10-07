@@ -16,25 +16,9 @@ class ScanAntar extends StatefulWidget {
 
 class _ScanAntarState extends State<ScanAntar>
     with SingleTickerProviderStateMixin {
-  // int cek1 = Util.cek1;
-  // int cek2 = Util.cek2;
-  // int cek3 = Util.cek3;
-  // int cek4 = Util.cek4;
-  // int cek5 = Util.cek5;
-  // int cek6 = Util.cek6;
-  // int cek7 = Util.cek7;
-  // int cek8 = Util.cek8;
-  // int cek9 = Util.cek9;
-  // int cek10 = Util.cek10;
-  // int cek11 = Util.cek11;
-  // int cek12 = Util.cek12;
-  // int cek13 = Util.cek13;
-  // int cek14 = Util.cek14;
-  // int cek15 = Util.cek15;
-  // int cek16 = Util.cek16;
-
   String pertemuanJson =
       '{"menuAbsen":[{"pertemuan":"1","per":"satu"},{"pertemuan":"2","per":"dua"},{"pertemuan":"3","per":"tiga"},{"pertemuan":"4","per":"empat"},{"pertemuan":"5","per":"lima"},{"pertemuan":"6","per":"enam"},{"pertemuan":"7","per":"tujuh"},{"pertemuan":"8","per":"delapan"},{"pertemuan":"9","per":"sembilan"},{"pertemuan":"10","per":"sepuluh"},{"pertemuan":"11","per":"sebelas"},{"pertemuan":"12","per":"dua_belas"},{"pertemuan":"13","per":"tiga_belas"},{"pertemuan":"14","per":"empat_belas"},{"pertemuan":"15","per":"lima_belas"},{"pertemuan":"16","per":"enam_belas"}]}';
+  // String pertemuanJson =
   final ScrollController _scrollController = ScrollController();
   List<dynamic> pertemuan;
   // variabel animasi floatbutton
@@ -69,8 +53,8 @@ class _ScanAntarState extends State<ScanAntar>
     } else {
       final data = jsonDecode(response.body);
       data.forEach((api) {
-        final ok = new MhsPengantar(
-            api['nim'], api['nama'], api['persentase'], api['foto']);
+        final ok = new MhsPengantar(api['id'], api['nim'], api['nama'],
+            api['persentase'], api['foto'], api['ket']);
         listmhs.add(ok);
       });
       setState(() {
@@ -584,15 +568,24 @@ class _ScanAntarState extends State<ScanAntar>
                 ? Center(child: CircularProgressIndicator())
                 : notfound
                     ? Center(child: Text("No Data Found!"))
-                    : ListView.separated(
-                        separatorBuilder: (context, index) => Divider(
-                              color: Colors.black12,
-                            ),
+                    : ListView.builder(
                         itemCount: listmhs.length,
                         itemBuilder: (context, i) {
                           final res = listmhs[i];
                           double p = double.parse(res.persentase);
                           double sen = (p / 16) * 100;
+
+                          mark(id) async {
+                            final res =
+                                await http.post(Baseurl.mark, body: {'id': id});
+                            return res;
+                          }
+
+                          unmark(id) async {
+                            final res = await http
+                                .post(Baseurl.unmark, body: {'id': id});
+                            return res;
+                          }
 
                           return Container(
                             child: Padding(
@@ -600,71 +593,159 @@ class _ScanAntarState extends State<ScanAntar>
                                   const EdgeInsets.symmetric(vertical: 5.0),
                               child: Column(
                                 children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          width: 50,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: new DecorationImage(
-                                                  fit: BoxFit.contain,
-                                                  image: new NetworkImage(Baseurl
-                                                          .ip +
-                                                      '/muaz_ta/assets/images/mahasiswa/' +
-                                                      res.foto))),
-                                        ),
+                                  Card(
+                                    color: res.ket == 'benar'
+                                        ? Colors.white
+                                        : Colors.red[200],
+                                    child: InkWell(
+                                      onLongPress: res.ket == 'benar'
+                                          ? () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          new Text("Options!"),
+                                                      content: Row(
+                                                        children: <Widget>[
+                                                          Text(
+                                                              "Mark this student?")
+                                                        ],
+                                                      ),
+                                                      actions: <Widget>[
+                                                        new FlatButton(
+                                                          child:
+                                                              new Text("Yes"),
+                                                          onPressed: () {
+                                                            mark(res.id);
+                                                            _tampilmhs();
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        new FlatButton(
+                                                          child: new Text("No"),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                            }
+                                          : () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          new Text("Options!"),
+                                                      content: Row(
+                                                        children: <Widget>[
+                                                          Text(
+                                                              "Unmark this student?")
+                                                        ],
+                                                      ),
+                                                      actions: <Widget>[
+                                                        new FlatButton(
+                                                          child:
+                                                              new Text("Yes"),
+                                                          onPressed: () {
+                                                            unmark(res.id);
+                                                            _tampilmhs();
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                        new FlatButton(
+                                                          child: new Text("No"),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                      child: Row(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: new DecorationImage(
+                                                      fit: BoxFit.contain,
+                                                      image: new NetworkImage(
+                                                          Baseurl.ip +
+                                                              '/muaz_ta/assets/images/mahasiswa/' +
+                                                              res.foto))),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(res.nama,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18.0)),
+                                                Text(res.nim),
+                                              ],
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: new Text("Info"),
+                                                      content: Row(
+                                                        children: <Widget>[
+                                                          Text("Kehadiran = " +
+                                                              sen.toString() +
+                                                              ' %')
+                                                        ],
+                                                      ),
+                                                      actions: <Widget>[
+                                                        new FlatButton(
+                                                          child:
+                                                              new Text("Close"),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                            icon: p < 13
+                                                ? Icon(
+                                                    Icons.info_outline,
+                                                    color: Colors.red,
+                                                  )
+                                                : Icon(Icons.info_outline,
+                                                    color: Colors.green),
+                                          )
+                                        ],
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(res.nama,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18.0)),
-                                            Text(res.nim),
-                                          ],
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: new Text("Info"),
-                                                  content: Row(
-                                                    children: <Widget>[
-                                                      Text("Kehadiran = " +
-                                                          sen.toString() +
-                                                          ' %')
-                                                    ],
-                                                  ),
-                                                  actions: <Widget>[
-                                                    new FlatButton(
-                                                      child: new Text("Close"),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        icon: p < 13
-                                            ? Icon(
-                                                Icons.info_outline,
-                                                color: Colors.red,
-                                              )
-                                            : Icon(Icons.info_outline,
-                                                color: Colors.green),
-                                      )
-                                    ],
+                                    ),
                                   )
                                 ],
                               ),

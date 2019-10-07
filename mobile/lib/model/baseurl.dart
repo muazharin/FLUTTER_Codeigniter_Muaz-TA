@@ -7,4 +7,6 @@ class Baseurl {
   static String cekpertemuan = "$ip/muaz_ta/api/cekpertemuan";
   static String updateabsenpengantar = "$ip/muaz_ta/api/updateabsenpengantar";
   static String absenmi = "$ip/muaz_ta/api/absenmi";
+  static String mark = "$ip/muaz_ta/api/mark";
+  static String unmark = "$ip/muaz_ta/api/unmark";
 }

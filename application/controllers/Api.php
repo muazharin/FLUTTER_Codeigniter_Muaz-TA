@@ -168,6 +168,7 @@ class Api extends CI_Controller {
                 'nama_mata_kuliah' => $mk,
                 'kelas' => $kelas,
                 'persentase' => '0',
+                'ket' => 'benar',
             ];
             $api2 = [
                 'nim' => $q->nim
@@ -200,14 +201,16 @@ class Api extends CI_Controller {
     public function absen(){
         $namamatakuliah = $this->input->post("nama_mata_kuliah", true);
         $kelas = $this->input->post("kelas", true);
-        $qwe = $this->db->query('SELECT a.nim, a.nama_mhs, a.persentase, m.foto FROM tb_absen a LEFT JOIN tb_mhs m on a.nim = m.nim WHERE a.nama_mata_kuliah = "'.$namamatakuliah.'" AND a.kelas = "'.$kelas.'" ORDER BY nim ASC')->result();
+        $qwe = $this->db->query('SELECT a.id_absen, a.nim, a.nama_mhs, a.persentase, m.foto , a.ket FROM tb_absen a LEFT JOIN tb_mhs m on a.nim = m.nim WHERE a.nama_mata_kuliah = "'.$namamatakuliah.'" AND a.kelas = "'.$kelas.'" ORDER BY nim ASC')->result();
         $api = array();
         foreach($qwe as $w){
             $api[] = [
+                'id' => $w->id_absen,
                 'nim' => $w->nim,
                 'nama' => $w->nama_mhs,
                 'persentase' => $w->persentase,
-                'foto' => $w->foto
+                'foto' => $w->foto,
+                'ket' => $w->ket
             ];
         }
         echo json_encode($api);
@@ -252,5 +255,23 @@ class Api extends CI_Controller {
             'cek16' => $cek16->num_rows(),
         ];
         echo json_encode($api);  
+    }
+
+    public function mark(){
+        $id =  $this->input->post('id');
+        $data = [
+            'ket' => 'salah'
+        ];
+        $this->db->where('id_absen', $id);
+        return $this->db->update('tb_absen', $data);
+    }
+    
+    public function unmark(){
+        $id =  $this->input->post('id');
+        $data = [
+            'ket' => 'benar'
+        ];
+        $this->db->where('id_absen', $id);
+        return $this->db->update('tb_absen', $data);
     }
 }
