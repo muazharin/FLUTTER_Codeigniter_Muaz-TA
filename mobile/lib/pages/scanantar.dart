@@ -53,8 +53,16 @@ class _ScanAntarState extends State<ScanAntar>
     } else {
       final data = jsonDecode(response.body);
       data.forEach((api) {
-        final ok = new MhsPengantar(api['id'], api['nim'], api['nama'],
-            api['persentase'], api['foto'], api['ket']);
+        final ok = new MhsPengantar(
+            api['id'],
+            api['nim'],
+            api['nama'],
+            api['persentase'],
+            api['foto'],
+            api['ket'],
+            api['alpa'],
+            api['izin'],
+            api['sakit']);
         listmhs.add(ok);
       });
       setState(() {
@@ -713,12 +721,28 @@ class _ScanAntarState extends State<ScanAntar>
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
-                                                      title: new Text("Info"),
+                                                      title: new Text("Info!"),
                                                       content: Row(
                                                         children: <Widget>[
-                                                          Text("Kehadiran = " +
+                                                          Text("Nama  : " +
+                                                              res.nama +
+                                                              "\nNIM     : " +
+                                                              res.nim +
+                                                              "\nHadir : " +
+                                                              res.persentase
+                                                                  .toString() +
+                                                              "\nAlpa : " +
+                                                              res.alpa
+                                                                  .toString() +
+                                                              "\nIzin : " +
+                                                              res.izin
+                                                                  .toString() +
+                                                              "\nSakit : " +
+                                                              res.sakit
+                                                                  .toString() +
+                                                              "\n\nKehadiran : " +
                                                               sen.toString() +
-                                                              ' %')
+                                                              " % ")
                                                         ],
                                                       ),
                                                       actions: <Widget>[

@@ -204,13 +204,19 @@ class Api extends CI_Controller {
         $qwe = $this->db->query('SELECT a.id_absen, a.nim, a.nama_mhs, a.persentase, m.foto , a.ket FROM tb_absen a LEFT JOIN tb_mhs m on a.nim = m.nim WHERE a.nama_mata_kuliah = "'.$namamatakuliah.'" AND a.kelas = "'.$kelas.'" ORDER BY nim ASC')->result();
         $api = array();
         foreach($qwe as $w){
+            $alpa = $this->db->query('SELECT COUNT(*) FROM tb_persentase WHERE nim = "'.$w->nim.'" AND nama_mata_kuliah = "'.$namamatakuliah.'" AND kehadiran = "a"')->result_array();
+            $izin = $this->db->query('SELECT COUNT(*) FROM tb_persentase WHERE nim = "'.$w->nim.'" AND nama_mata_kuliah = "'.$namamatakuliah.'" AND kehadiran = "i"')->result_array();
+            $sakit = $this->db->query('SELECT COUNT(*) FROM tb_persentase WHERE nim = "'.$w->nim.'" AND nama_mata_kuliah = "'.$namamatakuliah.'" AND kehadiran = "s"')->result_array();
             $api[] = [
                 'id' => $w->id_absen,
                 'nim' => $w->nim,
                 'nama' => $w->nama_mhs,
                 'persentase' => $w->persentase,
                 'foto' => $w->foto,
-                'ket' => $w->ket
+                'ket' => $w->ket,
+                'alpa' => $alpa[0]["COUNT(*)"],
+                'izin' => $izin[0]["COUNT(*)"],
+                'sakit' => $sakit[0]["COUNT(*)"],
             ];
         }
         echo json_encode($api);
