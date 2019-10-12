@@ -521,14 +521,33 @@ class _ScanAntarState extends State<ScanAntar>
     String mes = datains['pes'];
     String nma = datains['nama'];
     String nmi = datains['nim'];
+    String ft = datains['fto'];
+    print(res.body);
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("Message:"),
-          // content: new Text('$nma $nmi $mes'),
-          content: Image.network(
-              Baseurl.ip + "/muaz_ta/assets/images/mahasiswa/" + nmi ),
+          // content: new Text(res.body),
+          content: new Container(
+            child: Column(
+              children: <Widget>[
+                Flexible(
+                  flex: 2,
+                  child: Image.network(
+                      Baseurl.ip + "/muaz_ta/assets/images/mahasiswa/" + ft),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Text(nmi),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Text("$nma \n$mes"),
+                ),
+              ],
+            ),
+          ),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),

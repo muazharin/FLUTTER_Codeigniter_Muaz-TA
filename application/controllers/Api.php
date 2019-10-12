@@ -173,6 +173,9 @@ class Api extends CI_Controller {
             $api2 = [
                 'nim' => $q->nim
             ];
+            $ft = [
+                'ft' => $q->foto
+            ];
         }
         $cek = $this->db->query('SELECT * FROM tb_absen WHERE nim = "'.$api['nim'].'" AND nama_mata_kuliah = "'.$mk.'" AND kelas = "'.$kelas.'"');
         if($cek->num_rows()>0){
@@ -180,7 +183,8 @@ class Api extends CI_Controller {
                 'jml' => $cek->num_rows(),
                 'pes' => 'is already exist!',
                 'nama' => $api['nama_mhs'],
-                'nim' => $api['nim']
+                'nim' => $api['nim'],
+                'fto' => $api['ft']
             ];
             echo json_encode($d);
         }else{
@@ -195,7 +199,8 @@ class Api extends CI_Controller {
                 'jml' => $cek->num_rows(),
                 'pes' => 'successfully added!',
                 'nama' => $api['nama_mhs'],
-                'nim' => $api['nim']
+                'nim' => $api['nim'],
+                'fto' => $ft['ft']
             ];
             echo json_encode($d);
         }
