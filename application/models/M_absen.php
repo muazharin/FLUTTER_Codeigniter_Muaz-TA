@@ -24,7 +24,7 @@ class M_Absen extends CI_Model {
     }
 
     public function getDataAbsen(){
-        $mk =  $this->uri->segment(3);
+        $mk =  rawurldecode($this->uri->segment(3));
         $kls =  $this->uri->segment(4);
         $this->db->where('nama_mata_kuliah',$mk);
         $this->db->where('kelas',$kls);

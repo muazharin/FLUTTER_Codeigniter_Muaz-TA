@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Coba extends CI_Controller {
     public function index () {
         
-        $key = '15074';
-        $str = 'E1E11996-11-0715074Raha';
+        $key = '15001';
+        $str = 'E1E11997-10-2815001Kendari';
 
         $sentence = $str;
         $s = $key;

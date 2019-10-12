@@ -178,7 +178,9 @@ class Api extends CI_Controller {
         if($cek->num_rows()>0){
             $d = [
                 'jml' => $cek->num_rows(),
-                'pes' => 'The student is already exist!'
+                'pes' => 'is already exist!',
+                'nama' => $api['nama_mhs'],
+                'nim' => $api['nim']
             ];
             echo json_encode($d);
         }else{
@@ -191,7 +193,9 @@ class Api extends CI_Controller {
             }
             $d = [
                 'jml' => $cek->num_rows(),
-                'pes' => 'Data successfully added!'
+                'pes' => 'successfully added!',
+                'nama' => $api['nama_mhs'],
+                'nim' => $api['nim']
             ];
             echo json_encode($d);
         }

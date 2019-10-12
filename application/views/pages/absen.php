@@ -121,7 +121,15 @@
                                 <tbody>
                                     <?php $i = 0;?>
                                     <?php foreach($absen as $ab): $i++?>
-                                    <tr>
+                                    <?php 
+                                        $bc = '';
+                                        $cr = '';
+                                        if($ab['persentase'] < 13){
+                                            $bc = '#fcba03';
+                                            $cr = 'white';
+                                        }
+                                    ?>
+                                    <tr style="background-color: <?= $bc; ?>; color: <?= $cr;?>;">
                                         <td><?= $i;?></td>
                                         <td> <a target="_blank" href="<?= base_url();?>mahasiswa/cariMahasiswa/<?= $ab['nim'];?>"><?= $ab['nim'];?></a> </td>
                                         <td><?= $ab['nama_mhs'];?></td>

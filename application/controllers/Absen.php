@@ -40,9 +40,10 @@ class Absen extends CI_Controller {
 	}
 
     public function export(){
-        $data['export']=$this->M_absen->getDataAbsen();
-        $mk =  $this->uri->segment(3);
+        $mk =  rawurldecode($this->uri->segment(3));
         $kls =  $this->uri->segment(4);
+		$data['export']=$this->M_absen->getDataAbsen();
+		// echo $mk;
         require(APPPATH.'PHPExcel/Classes/PHPExcel.php');
 		require(APPPATH.'PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');
 
@@ -139,11 +140,14 @@ class Absen extends CI_Controller {
 			$baris++;
 		}
 
-		$filename=$mk.'xlsx';
+		// $mk = preg_replace(' ', '_', $mk);
+		// $filename = $mk.'xlsx';
+		
 
-		$objPhpExcel->getActiveSheet()->setTitle('Absen Mata Kuliah '.$mk.'-'.$kls);
+		$objPhpExcel->getActiveSheet()->setTitle('Absen Mata Kuliah ');
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment; filename:"'.$filename.'"');
+		// header('Content-Disposition: attachment; filename:"'.$filename.'"');
+		header('Content-Disposition: attachment; filename:"absen.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$write=PHPExcel_IOFactory::createWriter($objPhpExcel,'Excel2007');

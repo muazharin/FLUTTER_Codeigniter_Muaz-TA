@@ -519,12 +519,16 @@ class _ScanAntarState extends State<ScanAntar>
     });
     var datains = jsonDecode(res.body);
     String mes = datains['pes'];
+    String nma = datains['nama'];
+    String nmi = datains['nim'];
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Message"),
-          content: new Text(mes),
+          title: new Text("Message:"),
+          // content: new Text('$nma $nmi $mes'),
+          content: Image.network(
+              Baseurl.ip + "/muaz_ta/assets/images/mahasiswa/" + nmi ),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Close"),
