@@ -173,7 +173,7 @@ class Api extends CI_Controller {
             $api2 = [
                 'nim' => $q->nim
             ];
-            $ft = [
+            $ft1 = [
                 'ft' => $q->foto
             ];
         }
@@ -184,7 +184,7 @@ class Api extends CI_Controller {
                 'pes' => 'is already exist!',
                 'nama' => $api['nama_mhs'],
                 'nim' => $api['nim'],
-                'fto' => $api['ft']
+                'fto' => $ft1['ft']
             ];
             echo json_encode($d);
         }else{
@@ -200,7 +200,7 @@ class Api extends CI_Controller {
                 'pes' => 'successfully added!',
                 'nama' => $api['nama_mhs'],
                 'nim' => $api['nim'],
-                'fto' => $ft['ft']
+                'fto' => $ft1['ft']
             ];
             echo json_encode($d);
         }

@@ -172,204 +172,43 @@ class _ScanAntarState extends State<ScanAntar>
                           (BuildContext context, int index) {
                             Map<String, String> temu =
                                 pertemuan[index].cast<String, String>();
-                            Future<void> absendata() async {
-                              final response =
-                                  await http.post(Baseurl.absenmi, body: {
-                                'nim': Util.nim,
-                                'ab': Util.ab,
-                                'per': Util.pert,
-                                'mk': Util.mk,
-                                'kls': Util.kelasantar
-                              });
-                              print(Util.ab);
-                              print(Util.nim);
-                              var dataup = json.decode(response.body);
-                              // print(dataup['pesan']);
-                              // print(Util.pert);
+                            // Future<void> absendata() async {
+                            //   final response =
+                            //       await http.post(Baseurl.absenmi, body: {
+                            //     'nim': Util.nim,
+                            //     'ab': Util.ab,
+                            //     'per': Util.pert,
+                            //     'mk': Util.mk,
+                            //     'kls': Util.kelasantar
+                            //   });
+                            //   print(Util.ab);
+                            //   print(Util.nim);
+                            //   var dataup = json.decode(response.body);
+                            //   // print(dataup['pesan']);
+                            //   // print(Util.pert);
 
-                              String imes = dataup['pesan'];
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: new Text("Message"),
-                                    content: new Text(imes),
-                                    actions: <Widget>[
-                                      new FlatButton(
-                                        child: new Text("Close"),
-                                        onPressed: () {
-                                          _cekpertemuan();
-                                          _tampilmhs();
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
+                            //   String imes = dataup['pesan'];
+                            //   showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return AlertDialog(
+                            //         title: new Text("Message"),
+                            //         content: new Text(imes),
+                            //         actions: <Widget>[
+                            //           new FlatButton(
+                            //             child: new Text("Close"),
+                            //             onPressed: () {
+                            //               _cekpertemuan();
+                            //               _tampilmhs();
+                            //               Navigator.of(context).pop();
 
-                            void update(String _barcodeString) async {
-                              final res = await http
-                                  .post(Baseurl.updateabsenpengantar, body: {
-                                'barcode': _barcodeString,
-                              });
-                              var datains = jsonDecode(res.body);
-                              // String mes = datains['pes'];
-                              String nim = datains['nim'];
-                              String nama = datains['nama'];
-                              String foto = datains['foto'];
-
-                              print(nim);
-                              print(nama);
-                              print(foto);
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    content: new Container(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Flexible(
-                                            flex: 2,
-                                            child: Image.network(Baseurl.ip +
-                                                "/muaz_ta/assets/images/mahasiswa/" +
-                                                foto),
-                                          ),
-                                          Flexible(
-                                            flex: 1,
-                                            child: Text(nim),
-                                          ),
-                                          Flexible(
-                                            flex: 1,
-                                            child: Text(nama),
-                                          ),
-                                          new Container(
-                                            child: Column(
-                                              children: <Widget>[
-                                                Row(
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: new RaisedButton(
-                                                        color: Colors.blue,
-                                                        child: new Text("Hadir",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white)),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            Util.nim = nim;
-                                                            Util.ab = 'h';
-                                                            Util.pert =
-                                                                temu['per'];
-                                                          });
-                                                          absendata();
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: new RaisedButton(
-                                                        color: Colors.blue,
-                                                        child: new Text("Alpa",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white)),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            Util.nim = nim;
-                                                            Util.ab = 'a';
-                                                            Util.pert =
-                                                                temu['per'];
-                                                          });
-                                                          absendata();
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: new RaisedButton(
-                                                        color: Colors.blue,
-                                                        child: new Text(
-                                                          "Izin",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            Util.nim = nim;
-                                                            Util.ab = 'i';
-                                                            Util.pert =
-                                                                temu['per'];
-                                                          });
-                                                          absendata();
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: new RaisedButton(
-                                                        color: Colors.blue,
-                                                        child: new Text("Sakit",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white)),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            Util.nim = nim;
-                                                            Util.ab = 's';
-                                                            Util.pert =
-                                                                temu['per'];
-                                                          });
-                                                          absendata();
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      RaisedButton(
-                                        child: new Text(
-                                          "Close",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
-                            }
+                            //             },
+                            //           ),
+                            //         ],
+                            //       );
+                            //     },
+                            //   );
+                            // }
 
                             scanup() async {
                               try {
@@ -381,7 +220,103 @@ class _ScanAntarState extends State<ScanAntar>
                                   _barcodeString = reader;
                                 });
                                 print("String = " + _barcodeString);
-                                update(_barcodeString);
+                                // update(_barcodeString);
+                                final res = await http
+                                    .post(Baseurl.updateabsenpengantar, body: {
+                                  'barcode': _barcodeString,
+                                });
+                                var datains = jsonDecode(res.body);
+                                String nim = datains['nim'];
+                                String nama = datains['nama'];
+                                String foto = datains['foto'];
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: new Text("Message"),
+                                      content: new Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Flexible(
+                                              flex: 2,
+                                              child: Image.network(Baseurl.ip +
+                                                  "/muaz_ta/assets/images/mahasiswa/" +
+                                                  foto),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Text(nim),
+                                            ),
+                                            Flexible(
+                                              flex: 1,
+                                              child: Text(nama),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                            child: new Text("Hadir"),
+                                            onPressed: () async {
+                                              setState(() {
+                                                Util.nim = nim;
+                                                Util.ab = 'h';
+                                                Util.pert = temu['per'];
+                                              });
+
+                                              final response = await http
+                                                  .post(Baseurl.absenmi, body: {
+                                                'nim': Util.nim,
+                                                'ab': Util.ab,
+                                                'per': Util.pert,
+                                                'mk': Util.mk,
+                                                'kls': Util.kelasantar
+                                              });
+                                              print(Util.ab);
+                                              print(Util.nim);
+                                              var dataup =
+                                                  json.decode(response.body);
+                                              // print(dataup['pesan']);
+                                              // print(Util.pert);
+
+                                              String imes = dataup['pesan'];
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: new Text("Message"),
+                                                    content: new Text(imes),
+                                                    actions: <Widget>[
+                                                      new FlatButton(
+                                                        child:
+                                                            new Text("Close"),
+                                                        onPressed: () {
+                                                          _cekpertemuan();
+                                                          _tampilmhs();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          scanup();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            }),
+                                        new FlatButton(
+                                          child: new Text("Close"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                            scanup();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               } on PlatformException catch (e) {
                                 if (e.code ==
                                     BarcodeScanner.CameraAccessDenied) {

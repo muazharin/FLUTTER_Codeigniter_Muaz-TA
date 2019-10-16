@@ -210,6 +210,279 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 1</p>
+                                        <select class="form-control show-tick" name="per_satu">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_satu']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 2</p>
+                                        <select class="form-control show-tick" name="per_dua">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_dua']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 3</p>
+                                        <select class="form-control show-tick" name="per_tiga">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_tiga']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 4</p>
+                                        <select class="form-control show-tick" name="per_empat">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_empat']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 5</p>
+                                        <select class="form-control show-tick" name="per_lima">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_lima']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 6</p>
+                                        <select class="form-control show-tick" name="per_enam">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_enam']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 7</p>
+                                        <select class="form-control show-tick" name="per_tujuh">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_tujuh']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 8</p>
+                                        <select class="form-control show-tick" name="per_delapan">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_delapan']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 9</p>
+                                        <select class="form-control show-tick" name="per_sembilan">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_sembilan']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 10</p>
+                                        <select class="form-control show-tick" name="per_sepuluh">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_sepuluh']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 11</p>
+                                        <select class="form-control show-tick" name="per_sebelas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_sebelas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 12</p>
+                                        <select class="form-control show-tick" name="per_dua_belas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_dua_belas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 13</p>
+                                        <select class="form-control show-tick" name="per_tiga_belas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_tiga_belas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 14</p>
+                                        <select class="form-control show-tick" name="per_empat_belas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_empat_belas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 15</p>
+                                        <select class="form-control show-tick" name="per_lima_belas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_lima_belas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <p>Pertemuan 16</p>
+                                        <select class="form-control show-tick" name="per_enam_belas">
+                                            <option></option>
+                                            <?php foreach($pilih as $pil):?>
+                                                <?php if($pil == $ab['per_enam_belas']){?>
+                                                    <option value="<?= $pil;?>" selected><?= $pil;?></option>
+                                                <?php }else{?>
+                                                    <option value="<?= $pil;?>"><?= $pil;?></option>
+                                                <?php }?>
+                                            <?php endforeach;?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br> -->
                             <input type="hidden" class="form-control" name="id_absen" value="<?= $ab['id_absen'];?>" required>
                             <button class="btn btn-primary waves-effect" type="submit">Perbarui</button>
                         </form>

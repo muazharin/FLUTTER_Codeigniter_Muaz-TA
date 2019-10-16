@@ -16,6 +16,7 @@ class Absen extends CI_Controller {
         $data['judul_kelas'] = 'ganjil';
         $data['matkul'] = $this->M_absen->getMatKul();
         $data['kelas'] = ['ganjil','genap','ganjil/genap'];
+        // $data['pilih'] = ['a','h','i','s'];
         $data['absen'] = $this->M_absen->getAllDataAbsen();
         if($this->input->post('matkul') && $this->input->post('kelas')){
             $data['judul_matkul'] = $this->input->post('matkul');

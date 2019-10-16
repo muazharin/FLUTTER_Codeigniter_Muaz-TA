@@ -34,7 +34,23 @@ class M_Absen extends CI_Model {
     public function edit(){
         $id = $this->input->post('id_absen');
         $data = [
-            'kelas' => $this->input->post('kel')
+            'kelas' => $this->input->post('kel'),
+            // 'per_satu' => $this->input->post('per_satu'),
+            // 'per_dua' => $this->input->post('per_dua'),
+            // 'per_tiga' => $this->input->post('per_tiga'),
+            // 'per_empat' => $this->input->post('per_empat'),
+            // 'per_lima' => $this->input->post('per_lima'),
+            // 'per_enam' => $this->input->post('per_enam'),
+            // 'per_tujuh' => $this->input->post('per_tujuh'),
+            // 'per_delapan' => $this->input->post('per_delapan'),
+            // 'per_sembilan' => $this->input->post('per_sembilan'),
+            // 'per_sepuluh' => $this->input->post('per_sepuluh'),
+            // 'per_sebelas' => $this->input->post('per_sebelas'),
+            // 'per_dua_belas' => $this->input->post('per_dua_belas'),
+            // 'per_tiga_belas' => $this->input->post('per_tiga_belas'),
+            // 'per_empat_belas' => $this->input->post('per_empat_belas'),
+            // 'per_lima_belas' => $this->input->post('per_lima_belas'),
+            // 'per_enam_belas' => $this->input->post('per_enam_belas')
         ];
         $this->db->where('id_absen', $id);
         return $this->db->update('tb_absen', $data);
